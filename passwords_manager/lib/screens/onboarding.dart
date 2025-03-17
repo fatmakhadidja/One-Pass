@@ -19,7 +19,7 @@ class _OnboardingState extends State<Onboarding> {
             ElevatedButton(
               onPressed: () {},
               child: Text(
-                "buttn",
+                "button",
                 style: Theme.of(context).textTheme.titleSmall,
               ),
             ),
