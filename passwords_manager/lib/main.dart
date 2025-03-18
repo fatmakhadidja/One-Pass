@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:passwords_manager/screens/homescreen.dart';
 import 'package:passwords_manager/screens/onboarding.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'package:passwords_manager/theme/theme_manager.dart';
@@ -38,6 +39,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {'/home': (context) => HomeScreen()},
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeManager.themeMode,
