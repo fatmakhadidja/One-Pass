@@ -21,9 +21,23 @@ ThemeData lightTheme = ThemeData(
   ),
 
   textTheme: TextTheme(
-    titleSmall: TextStyle(color: secondaryColor, fontSize: 12),
-    titleMedium: TextStyle(color: secondaryColor, fontSize: 16),
-    titleLarge: TextStyle(color: secondaryColor, fontSize: 20),
+    headlineLarge: TextStyle(
+      color: secondaryColor,
+      fontFamily: 'BabasNeue',
+      fontSize: 64,
+      fontWeight: FontWeight.normal,
+    ),
+    headlineMedium: TextStyle(
+      color: secondaryColor,
+      fontFamily: 'BabasNeue',
+      fontSize: 24,
+      fontWeight: FontWeight.normal,
+    ),
+    headlineSmall: TextStyle(
+      color: Color(0xffBABABA),
+      fontSize: 14,
+      fontWeight: FontWeight.normal,
+    ),
   ),
 );
 
@@ -45,8 +59,23 @@ ThemeData darkTheme = ThemeData(
   ),
 
   textTheme: TextTheme(
-    titleSmall: TextStyle(color: Colors.white, fontSize: 12),
-    titleMedium: TextStyle(color: Colors.white, fontSize: 16),
-    titleLarge: TextStyle(color: Colors.white, fontSize: 20),
+    headlineLarge: TextStyle(
+      color: Colors.white,
+      fontFamily: 'BabasNeue',
+      fontSize: 64,
+      fontWeight: FontWeight.normal,
+    ),
+    headlineMedium: TextStyle(
+      color: Colors.white,
+      fontFamily: 'BabasNeue',
+      fontSize: 24,
+      fontWeight: FontWeight.normal,
+    ),
+    headlineSmall: TextStyle(
+      color: Colors.white,
+
+      fontSize: 14,
+      fontWeight: FontWeight.normal,
+    ),
   ),
 );
