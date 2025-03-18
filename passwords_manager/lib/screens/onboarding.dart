@@ -245,7 +245,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
                         ),
                       ),
                       TextSpan(
-                        text: 'YOUR PASSWORDS',
+                        text: 'YOUR CREDENTIALS',
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
                     ],
