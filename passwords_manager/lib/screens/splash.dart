@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
-import 'homescreen.dart';
 import 'onboarding.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 class SplashScreen extends StatefulWidget {
