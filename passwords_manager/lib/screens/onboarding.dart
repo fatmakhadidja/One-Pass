@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:passwords_manager/core/constants.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+import 'homescreen.dart';
+
 int index = 0;
 
 class Onboarding extends StatefulWidget {
@@ -12,25 +15,22 @@ class Onboarding extends StatefulWidget {
 }
 
 class _OnboardingState extends State<Onboarding> {
-  scrollToPage(int ind) {
+  int index = 0;
+
+  void scrollToPage(int ind) {
     setState(() {
       index = ind;
     });
   }
 
-  late List<Widget> onboardingScreens;
   @override
-  void initState() {
-    super.initState();
-    onboardingScreens = [
+  Widget build(BuildContext context) {
+    final List<Widget> onboardingScreens = [
       FirstScreen(onNext: scrollToPage),
       SecondScreen(onNext: scrollToPage),
       ThirdScreen(onNext: scrollToPage),
     ];
-  }
 
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: onboardingScreens[index],
@@ -204,7 +204,7 @@ class _SecondScreenState extends State<SecondScreen> {
 }
 
 class ThirdScreen extends StatefulWidget {
-  final Function(int) onNext; // Callback function to change page
+  final Function(int) onNext;
   const ThirdScreen({super.key, required this.onNext});
 
   @override
@@ -212,6 +212,16 @@ class ThirdScreen extends StatefulWidget {
 }
 
 class _ThirdScreenState extends State<ThirdScreen> {
+  void completeOnboarding() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('hasSeenOnboarding', true);
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const HomeScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -232,7 +242,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: RichText(
                   text: TextSpan(
-                    text: 'DONT’T TYPE,  ',
+                    text: 'DON’T TYPE, ',
                     style: Theme.of(context).textTheme.headlineLarge,
                     children: [
                       TextSpan(
@@ -252,7 +262,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: Text(
@@ -265,24 +275,29 @@ class _ThirdScreenState extends State<ThirdScreen> {
           ),
 
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CountButton(
-                onNext: widget.onNext,
-                index: 1,
-                clr: Color(0xffBABABA),
+              Row(
+                children: [
+                  CountButton(
+                    onNext: widget.onNext,
+                    index: 1,
+                    clr: const Color(0xffBABABA),
+                  ),
+                  CountButton(
+                    onNext: widget.onNext,
+                    index: 2,
+                    clr: const Color(0xffBABABA),
+                  ),
+                  CountButton(
+                    onNext: widget.onNext,
+                    index: 3,
+                    clr: primaryColor,
+                  ),
+                ],
               ),
-              CountButton(
-                onNext: widget.onNext,
-                index: 2,
-                clr: Color(0xffBABABA),
-              ),
-              CountButton(onNext: widget.onNext, index: 3, clr: primaryColor),
-              Spacer(),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context,'/home');
-                },
+                onPressed: completeOnboarding,
                 style: ButtonStyle(
                   backgroundColor: WidgetStatePropertyAll(primaryColor),
                   shape: WidgetStatePropertyAll(
@@ -291,7 +306,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
                     ),
                   ),
                 ),
-                child: Icon(Icons.arrow_forward, color: Colors.white),
+                child: const Icon(Icons.arrow_forward, color: Colors.white),
               ),
             ],
           ),

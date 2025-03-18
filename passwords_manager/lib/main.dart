@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/screens/homescreen.dart';
 import 'package:passwords_manager/screens/onboarding.dart';
+import 'package:passwords_manager/screens/splash.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'package:passwords_manager/theme/theme_manager.dart';
 
@@ -43,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeManager.themeMode,
-      home: Onboarding(),
+      home: SplashScreen(),
     );
   }
 }
