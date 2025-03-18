@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:passwords_manager/core/constants.dart';
+import 'package:passwords_manager/main.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'homescreen.dart';
-
-int index = 0;
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
@@ -15,207 +12,123 @@ class Onboarding extends StatefulWidget {
 }
 
 class _OnboardingState extends State<Onboarding> {
+  final PageController _pageController = PageController();
   int index = 0;
 
   void scrollToPage(int ind) {
-    setState(() {
-      index = ind;
-    });
+    _pageController.animateToPage(
+      ind,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> onboardingScreens = [
-      FirstScreen(onNext: scrollToPage),
-      SecondScreen(onNext: scrollToPage),
-      ThirdScreen(onNext: scrollToPage),
-    ];
-
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: onboardingScreens[index],
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (i) {
+          setState(() {
+            index = i;
+          });
+        },
+        children: [
+          FirstScreen(onNext: scrollToPage),
+          SecondScreen(onNext: scrollToPage),
+          ThirdScreen(onNext: scrollToPage),
+        ],
+      ),
     );
   }
 }
 
-class FirstScreen extends StatefulWidget {
-  final Function(int) onNext; // Callback function to change page
+class FirstScreen extends StatelessWidget {
+  final Function(int) onNext;
   const FirstScreen({super.key, required this.onNext});
 
   @override
-  State<FirstScreen> createState() => _FirstScreenState();
-}
-
-class _FirstScreenState extends State<FirstScreen> {
-  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SafeArea(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [Image.asset('assets/images/logo.png')],
-            ),
-          ),
-
-          Column(
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: RichText(
-                  text: TextSpan(
-                    text: 'GENERATE ',
-                    style: Theme.of(context).textTheme.headlineLarge,
-                    children: [
-                      TextSpan(
-                        text: 'SECURE ',
-                        style: TextStyle(
-                          color: primaryColor,
-                          fontFamily: 'BabasNeue',
-                          fontSize: 64,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'PASSWORDS',
-                        style: Theme.of(context).textTheme.headlineLarge,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 15),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: Text(
-                  'Stop using unsecure passwords for your online accounts, '
-                  'level up with OnePass. Get the most secure and difficult-to-crack passwords.',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-              ),
-            ],
-          ),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              CountButton(onNext: widget.onNext, index: 1, clr: primaryColor),
-              CountButton(
-                onNext: widget.onNext,
-                index: 2,
-                clr: Color(0xffBABABA),
-              ),
-              CountButton(
-                onNext: widget.onNext,
-                index: 3,
-                clr: Color(0xffBABABA),
-              ),
-            ],
-          ),
-        ],
-      ),
+    return OnboardingPage(
+      logo: 'assets/images/logo.png',
+      title: 'GENERATE ',
+      highlighted: 'SECURE ',
+      subtitle: 'PASSWORDS',
+      description:
+          'Stop using unsecure passwords for your online accounts, level up with OnePass.',
+      onNext: onNext,
+      currentIndex: 0,
     );
   }
 }
 
-class SecondScreen extends StatefulWidget {
-  final Function(int) onNext; // Callback function to change page
-  const SecondScreen({super.key, required this.onNext});
-  @override
-  State<SecondScreen> createState() => _SecondScreenState();
-}
-
-class _SecondScreenState extends State<SecondScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SafeArea(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [Image.asset('assets/images/logo.png')],
-            ),
-          ),
-
-          Column(
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: RichText(
-                  text: TextSpan(
-                    text: 'ALL YOUR ',
-                    style: Theme.of(context).textTheme.headlineLarge,
-                    children: [
-                      TextSpan(
-                        text: 'PASSWORDS ',
-                        style: TextStyle(
-                          color: primaryColor,
-                          fontFamily: 'BabasNeue',
-                          fontSize: 64,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'ARE HERE',
-                        style: Theme.of(context).textTheme.headlineLarge,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 15),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: Text(
-                  'Store and manage all of your passwords from one place. '
-                  'Don’t remember hundreds of passwords, just remember one.',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-              ),
-            ],
-          ),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              CountButton(
-                onNext: widget.onNext,
-                index: 1,
-                clr: Color(0xffBABABA),
-              ),
-              CountButton(onNext: widget.onNext, index: 2, clr: primaryColor),
-              CountButton(
-                onNext: widget.onNext,
-                index: 3,
-                clr: Color(0xffBABABA),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ThirdScreen extends StatefulWidget {
+class SecondScreen extends StatelessWidget {
   final Function(int) onNext;
-  const ThirdScreen({super.key, required this.onNext});
+  const SecondScreen({super.key, required this.onNext});
 
   @override
-  State<ThirdScreen> createState() => _ThirdScreenState();
+  Widget build(BuildContext context) {
+    return OnboardingPage(
+      logo: 'assets/images/logo.png',
+      title: 'ALL YOUR ',
+      highlighted: 'PASSWORDS ',
+      subtitle: 'ARE HERE',
+      description:
+          'Store and manage all of your passwords from one place. Don’t remember hundreds of passwords, just remember one.',
+      onNext: onNext,
+      currentIndex: 1,
+    );
+  }
 }
 
-class _ThirdScreenState extends State<ThirdScreen> {
-  void completeOnboarding() async {
+class ThirdScreen extends StatelessWidget {
+  final Function(int) onNext;
+
+  ThirdScreen({super.key, required this.onNext});
+
+  @override
+  Widget build(BuildContext context) {
+    return OnboardingPage(
+      logo: 'assets/images/logo.png',
+      title: 'DON’T TYPE, ',
+      highlighted: 'AUTOFILL ',
+      subtitle: 'YOUR CREDENTIALS',
+      description:
+          'Let OnePass autofill your credentials and keep your passwords secure.',
+      onNext: onNext,
+
+      currentIndex: 2,
+      isLast: true,
+    );
+  }
+}
+
+class OnboardingPage extends StatelessWidget {
+  final String logo;
+  final String title;
+  final String highlighted;
+  final String subtitle;
+  final String description;
+  final Function(int) onNext;
+  final int currentIndex;
+  final bool isLast;
+
+  OnboardingPage({
+    super.key,
+    required this.logo,
+    required this.title,
+    required this.highlighted,
+    required this.subtitle,
+    required this.description,
+    required this.onNext,
+    required this.currentIndex,
+    this.isLast = false,
+  });
+
+  void completeOnboarding(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('hasSeenOnboarding', true);
-
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const HomeScreen()),
@@ -225,28 +138,27 @@ class _ThirdScreenState extends State<ThirdScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(20.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SafeArea(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: [Image.asset('assets/images/logo.png')],
+              children: [Image.asset(logo)],
             ),
           ),
-
           Column(
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: RichText(
                   text: TextSpan(
-                    text: 'DON’T TYPE, ',
+                    text: title,
                     style: Theme.of(context).textTheme.headlineLarge,
                     children: [
                       TextSpan(
-                        text: 'AUTOFILL ',
+                        text: highlighted,
                         style: TextStyle(
                           color: primaryColor,
                           fontFamily: 'BabasNeue',
@@ -255,7 +167,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
                         ),
                       ),
                       TextSpan(
-                        text: 'YOUR CREDENTIALS',
+                        text: subtitle,
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
                     ],
@@ -266,51 +178,73 @@ class _ThirdScreenState extends State<ThirdScreen> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: Text(
-                  'Don’t compromise your passwords by typing them in public, '
-                  'let OnePass autofill those and keep your credentials secure.',
+                  description,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
             ],
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
-                children: [
-                  CountButton(
-                    onNext: widget.onNext,
-                    index: 1,
-                    clr: const Color(0xffBABABA),
-                  ),
-                  CountButton(
-                    onNext: widget.onNext,
-                    index: 2,
-                    clr: const Color(0xffBABABA),
-                  ),
-                  CountButton(
-                    onNext: widget.onNext,
-                    index: 3,
-                    clr: primaryColor,
-                  ),
-                ],
-              ),
-              ElevatedButton(
-                onPressed: completeOnboarding,
-                style: ButtonStyle(
-                  backgroundColor: WidgetStatePropertyAll(primaryColor),
-                  shape: WidgetStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(80),
-                    ),
+                children: List.generate(
+                  3,
+                  (i) => CountButton(
+                    onNext: onNext,
+                    index: i,
+                    clr:
+                        i == currentIndex
+                            ? primaryColor
+                            : const Color(0xffBABABA),
                   ),
                 ),
-                child: const Icon(Icons.arrow_forward, color: Colors.white),
               ),
+              isLast
+                  ? ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, '/home');
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(primaryColor),
+                      shape: WidgetStatePropertyAll(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(80),
+                        ),
+                      ),
+                    ),
+                    child: const Icon(Icons.arrow_forward, color: Colors.white),
+                  )
+                  : const SizedBox(),
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CountButton extends StatelessWidget {
+  final Function(int) onNext;
+  final int index;
+  final Color clr;
+
+  const CountButton({
+    super.key,
+    required this.onNext,
+    required this.index,
+    required this.clr,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => onNext(index),
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 5),
+        width: 10,
+        height: 10,
+        decoration: BoxDecoration(color: clr, shape: BoxShape.circle),
       ),
     );
   }

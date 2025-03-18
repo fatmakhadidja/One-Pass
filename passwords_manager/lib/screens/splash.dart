@@ -3,6 +3,7 @@ import 'package:passwords_manager/theme/theme_constants.dart';
 import 'homescreen.dart';
 import 'onboarding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -43,28 +44,44 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/logo.png'),
-            const SizedBox(height: 10),
-            RichText(
-              text: TextSpan(
-                text: 'ONE ',
-                style: TextStyle(
-                  color: primaryColor,
-                  fontFamily: 'BabasNeue',
-                  fontWeight: FontWeight.normal,
-                  fontSize: 24,
-                ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextSpan(
-                    text: 'PASS',
-                    style: Theme.of(context).textTheme.headlineMedium,
+                  Image.asset('assets/images/logo.png'),
+                  const SizedBox(height: 10),
+                  RichText(
+                    text: TextSpan(
+                      text: 'ONE ',
+                      style: TextStyle(
+                        color: primaryColor,
+                        fontFamily: 'BabasNeue',
+                        fontWeight: FontWeight.normal,
+                        fontSize: 24,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: 'PASS',
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: LoadingIndicator(
+                      indicatorType: Indicator.ballRotateChase,
+                      colors: const [Color(0xffBABABA), primaryColor],
+                    ),
                   ),
                 ],
               ),
             ),
-            Spacer(),
+
+            // This stays at the bottom
             Padding(
               padding: const EdgeInsets.all(20),
               child: Text(

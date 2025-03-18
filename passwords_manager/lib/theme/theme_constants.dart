@@ -6,7 +6,7 @@ const secondaryColor = Color(0xff545974);
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   scaffoldBackgroundColor: Colors.white,
-  primaryColor: primaryColor,
+  primaryColor: Colors.white,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       backgroundColor: WidgetStatePropertyAll(primaryColor),
@@ -44,7 +44,7 @@ ThemeData lightTheme = ThemeData(
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   scaffoldBackgroundColor: secondaryColor,
-  primaryColor: primaryColor,
+  primaryColor: secondaryColor,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       backgroundColor: WidgetStatePropertyAll(primaryColor),
