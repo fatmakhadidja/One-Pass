@@ -203,7 +203,7 @@ class OnboardingPage extends StatelessWidget {
               isLast
                   ? ElevatedButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/home');
+                      Navigator.pushNamed(context, '/home');
                     },
                     style: ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll(primaryColor),
