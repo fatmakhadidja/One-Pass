@@ -6,6 +6,7 @@ import 'package:passwords_manager/theme/theme_manager.dart';
 
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized(); 
   await themeManager.loadTheme();
   runApp(const MyApp());

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'onboarding.dart';
 import 'package:loading_indicator/loading_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'homescreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,20 +22,21 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _navigateToNextScreen() async {
     await Future.delayed(const Duration(seconds: 3)); // Splash delay
 
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // bool hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
 
-    // if (hasSeenOnboarding) {
-    //   Navigator.pushReplacement(
-    //     context,
-    //     MaterialPageRoute(builder: (context) => const HomeScreen()),
-    //   );
-    // } else {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const Onboarding()),
-    );
-    // }
+    if (hasSeenOnboarding) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
+    } else {
+      await prefs.setBool('hasSeenOnboarding', true);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Onboarding()),
+      );
+    }
   }
 
   @override
@@ -66,13 +69,13 @@ class _SplashScreenState extends State<SplashScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 10),
-                  SizedBox(
+                  const SizedBox(height: 10),
+                  const SizedBox(
                     width: 50,
                     height: 50,
                     child: LoadingIndicator(
                       indicatorType: Indicator.ballRotateChase,
-                      colors: const [Color(0xffBABABA), primaryColor],
+                      colors: [Color(0xffBABABA), primaryColor],
                     ),
                   ),
                 ],
