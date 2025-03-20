@@ -3,7 +3,6 @@ import 'package:passwords_manager/theme/theme_constants.dart';
 import 'onboarding.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'homescreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
