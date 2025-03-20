@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (hasSeenOnboarding) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(builder: (context) => const Onboarding()),
       );
     } else {
       await prefs.setBool('hasSeenOnboarding', true);
