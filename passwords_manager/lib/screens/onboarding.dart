@@ -14,14 +14,6 @@ class _OnboardingState extends State<Onboarding> {
   final PageController _pageController = PageController();
   int index = 0;
 
-  void scrollToPage(int ind) {
-    _pageController.animateToPage(
-      ind,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,19 +25,14 @@ class _OnboardingState extends State<Onboarding> {
             index = i;
           });
         },
-        children: [
-          FirstScreen(onNext: scrollToPage),
-          SecondScreen(onNext: scrollToPage),
-          ThirdScreen(onNext: scrollToPage),
-        ],
+        children: [FirstScreen(), SecondScreen(), ThirdScreen()],
       ),
     );
   }
 }
 
 class FirstScreen extends StatelessWidget {
-  final Function(int) onNext;
-  const FirstScreen({super.key, required this.onNext});
+  const FirstScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,15 +43,14 @@ class FirstScreen extends StatelessWidget {
       subtitle: 'PASSWORDS',
       description:
           'Stop using unsecure passwords for your online accounts, level up with OnePass.',
-      onNext: onNext,
+
       currentIndex: 0,
     );
   }
 }
 
 class SecondScreen extends StatelessWidget {
-  final Function(int) onNext;
-  const SecondScreen({super.key, required this.onNext});
+  const SecondScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -75,16 +61,14 @@ class SecondScreen extends StatelessWidget {
       subtitle: 'ARE HERE',
       description:
           'Store and manage all of your passwords from one place. Don’t remember hundreds of passwords, just remember one.',
-      onNext: onNext,
+
       currentIndex: 1,
     );
   }
 }
 
 class ThirdScreen extends StatelessWidget {
-  final Function(int) onNext;
-
-  ThirdScreen({super.key, required this.onNext});
+  ThirdScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +79,6 @@ class ThirdScreen extends StatelessWidget {
       subtitle: 'YOUR CREDENTIALS',
       description:
           'Let OnePass autofill your credentials and keep your passwords secure.',
-      onNext: onNext,
 
       currentIndex: 2,
       isLast: true,
@@ -109,7 +92,7 @@ class OnboardingPage extends StatefulWidget {
   final String highlighted;
   final String subtitle;
   final String description;
-  final Function(int) onNext;
+
   final int currentIndex;
   final bool isLast;
 
@@ -120,7 +103,6 @@ class OnboardingPage extends StatefulWidget {
     required this.highlighted,
     required this.subtitle,
     required this.description,
-    required this.onNext,
     required this.currentIndex,
     this.isLast = false,
   });
@@ -202,8 +184,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 children: List.generate(
                   3,
                   (i) => CountButton(
-                    onNext: widget.onNext,
-                    index: i,
                     clr:
                         i == widget.currentIndex
                             ? primaryColor
@@ -236,21 +216,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
 }
 
 class CountButton extends StatelessWidget {
-  final Function(int) onNext;
-  final int index;
   final Color clr;
 
-  const CountButton({
-    super.key,
-    required this.onNext,
-    required this.index,
-    required this.clr,
-  });
+  const CountButton({super.key, required this.clr});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onNext(index),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 5),
         width: 10,
