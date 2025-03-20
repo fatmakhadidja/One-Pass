@@ -4,7 +4,10 @@ import 'package:passwords_manager/screens/splash.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'package:passwords_manager/theme/theme_manager.dart';
 
-void main() {
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); 
+  await themeManager.loadTheme();
   runApp(const MyApp());
 }
 
@@ -18,7 +21,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
+  
+    @override
   void initState() {
     themeManager.addListener(themeListner);
     super.initState();

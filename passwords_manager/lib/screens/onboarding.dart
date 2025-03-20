@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:passwords_manager/main.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'homescreen.dart';
@@ -103,7 +104,7 @@ class ThirdScreen extends StatelessWidget {
   }
 }
 
-class OnboardingPage extends StatelessWidget {
+class OnboardingPage extends StatefulWidget {
   final String logo;
   final String title;
   final String highlighted;
@@ -125,6 +126,11 @@ class OnboardingPage extends StatelessWidget {
     this.isLast = false,
   });
 
+  @override
+  State<OnboardingPage> createState() => _OnboardingPageState();
+}
+
+class _OnboardingPageState extends State<OnboardingPage> {
   void completeOnboarding(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('hasSeenOnboarding', true);
@@ -144,7 +150,7 @@ class OnboardingPage extends StatelessWidget {
           SafeArea(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: [Image.asset(logo)],
+              children: [Image.asset(widget.logo)],
             ),
           ),
           Column(
@@ -153,11 +159,11 @@ class OnboardingPage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: RichText(
                   text: TextSpan(
-                    text: title,
+                    text: widget.title,
                     style: Theme.of(context).textTheme.headlineLarge,
                     children: [
                       TextSpan(
-                        text: highlighted,
+                        text: widget.highlighted,
                         style: TextStyle(
                           color: primaryColor,
                           fontFamily: 'BabasNeue',
@@ -166,7 +172,7 @@ class OnboardingPage extends StatelessWidget {
                         ),
                       ),
                       TextSpan(
-                        text: subtitle,
+                        text: widget.subtitle,
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
                     ],
@@ -177,12 +183,19 @@ class OnboardingPage extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: Text(
-                  description,
+                  widget.description,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
             ],
           ),
+          // Switch(
+          //   value: themeManager.themeMode == ThemeMode.dark,
+          //   onChanged: (bool isDark) async {
+          //     await themeManager.toggleTheme(isDark);
+          //     setState(() {});
+          //   },
+          // ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -190,16 +203,16 @@ class OnboardingPage extends StatelessWidget {
                 children: List.generate(
                   3,
                   (i) => CountButton(
-                    onNext: onNext,
+                    onNext: widget.onNext,
                     index: i,
                     clr:
-                        i == currentIndex
+                        i == widget.currentIndex
                             ? primaryColor
                             : const Color(0xffBABABA),
                   ),
                 ),
               ),
-              isLast
+              widget.isLast
                   ? ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/home');
