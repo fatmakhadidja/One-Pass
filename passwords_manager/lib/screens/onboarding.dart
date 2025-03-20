@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:passwords_manager/main.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'homescreen.dart';
