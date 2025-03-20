@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+
 const primaryColor = Color(0xffFF6464);
 const secondaryColor = Color(0xff545974);
+
 
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
