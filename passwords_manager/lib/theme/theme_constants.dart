@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-
 const primaryColor = Color(0xffFF6464);
 const secondaryColor = Color(0xff545974);
 
-
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
+  hintColor: Colors.white,
   scaffoldBackgroundColor: Colors.white,
   primaryColor: Colors.white,
+  package: 'white.png',
+  secondaryHeaderColor: secondaryColor,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       backgroundColor: WidgetStatePropertyAll(primaryColor),
@@ -40,6 +41,11 @@ ThemeData lightTheme = ThemeData(
       fontSize: 14,
       fontWeight: FontWeight.normal,
     ),
+    titleLarge: TextStyle(
+      color: secondaryColor,
+      fontSize: 20,
+      fontWeight: FontWeight.w500,
+    ),
   ),
 );
 
@@ -47,6 +53,9 @@ ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   scaffoldBackgroundColor: secondaryColor,
   primaryColor: secondaryColor,
+  hintColor: primaryColor,
+  package: 'red.png',
+  secondaryHeaderColor: Colors.white,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       backgroundColor: WidgetStatePropertyAll(primaryColor),
@@ -75,9 +84,13 @@ ThemeData darkTheme = ThemeData(
     ),
     headlineSmall: TextStyle(
       color: Colors.white,
-
       fontSize: 14,
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.w500,
+    ),
+    titleLarge: TextStyle(
+      color: Colors.white,
+      fontSize: 20,
+      fontWeight: FontWeight.w500,
     ),
   ),
 );
