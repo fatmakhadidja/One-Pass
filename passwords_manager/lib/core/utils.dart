@@ -92,10 +92,12 @@ class PasswordContainer extends StatelessWidget {
 class HomeSearchBar extends StatefulWidget {
   final Color borderColor;
   final FocusNode focusNode;
+  final TextEditingController searchController;
   const HomeSearchBar({
     super.key,
     required this.focusNode,
     required this.borderColor,
+    required this.searchController,
   });
 
   @override
@@ -106,6 +108,7 @@ class _HomeSearchBarState extends State<HomeSearchBar> {
   @override
   Widget build(BuildContext context) {
     return SearchBar(
+      controller: widget.searchController,
       focusNode: widget.focusNode,
       side: WidgetStateProperty.all(
         BorderSide(color: widget.borderColor, width: 1),

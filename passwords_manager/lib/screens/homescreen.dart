@@ -13,11 +13,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedindex = 0;
+  final TextEditingController _searchController = TextEditingController();
+
+  List<Map<String, dynamic>> filteredAccounts = [];
 
   List<Map<String, dynamic>> accounts = [
     {'icon': Icons.facebook, 'account': 'Facebook'},
-    {'icon': Icons.facebook, 'account': 'Facebook'},
-    {'icon': Icons.facebook, 'account': 'Facebook'},
+    {'icon': Icons.facebook, 'account': 'Instagram'},
+    {'icon': Icons.facebook, 'account': 'Twitter'},
     {'icon': Icons.facebook, 'account': 'Facebook'},
     {'icon': Icons.facebook, 'account': 'Facebook'},
     {'icon': Icons.facebook, 'account': 'Facebook'},
@@ -28,6 +31,20 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    filteredAccounts = List.from(accounts);
+
+    _searchController.addListener(() {
+      setState(() {
+        filteredAccounts =
+            accounts
+                .where(
+                  (account) => account['account'].toLowerCase().startsWith(
+                    _searchController.text.toLowerCase(),
+                  ),
+                )
+                .toList();
+      });
+    });
 
     // Listen for focus changes
     _focusNode.addListener(() {
@@ -39,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
+    _searchController.dispose();
     _focusNode.dispose();
     super.dispose();
   }
@@ -82,21 +100,38 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               SizedBox(height: 20),
-              HomeSearchBar(focusNode: _focusNode, borderColor: borderColor),
+              HomeSearchBar(
+                focusNode: _focusNode,
+                borderColor: borderColor,
+                searchController: _searchController,
+              ),
               SizedBox(height: 15),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children:
-                        accounts.map((account) {
-                          return Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                            child: AccountContainer(
-                              icon: account['icon']!,
-                              account: account['account']!,
-                            ),
-                          );
-                        }).toList(),
+                        filteredAccounts.isEmpty
+                            ? [
+                              Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Text(
+                                  "No accounts found",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                            ]
+                            : filteredAccounts.map((account) {
+                              return Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                                child: AccountContainer(
+                                  icon: account['icon']!,
+                                  account: account['account']!,
+                                ),
+                              );
+                            }).toList(),
                   ),
                 ),
               ),
