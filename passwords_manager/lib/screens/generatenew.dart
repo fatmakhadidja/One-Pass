@@ -118,17 +118,18 @@ class _GeneratenewState extends State<Generatenew> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+                          
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.4,
-                            child: ColoredButton(
-                              text: 'add new',
+                            child: BorderedButton(
+                              text: 'Randomize',
                               whenPressed: () {},
                             ),
                           ),
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.4,
-                            child: BorderedButton(
-                              text: 'Generate new',
+                            child: ColoredButton(
+                              text: 'Copy',
                               whenPressed: () {},
                             ),
                           ),
