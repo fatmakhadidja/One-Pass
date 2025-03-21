@@ -185,3 +185,75 @@ class AccountContainer extends StatelessWidget {
     );
   }
 }
+
+class ColoredButton extends StatelessWidget {
+  final String text;
+  final Function() whenPressed;
+  const ColoredButton({
+    super.key,
+    required this.text,
+    required this.whenPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ButtonStyle(
+        side: WidgetStatePropertyAll(BorderSide(color: primaryColor, width: 2)),
+        backgroundColor: WidgetStatePropertyAll(primaryColor),
+        foregroundColor: WidgetStatePropertyAll(Colors.white),
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        ),
+        padding: WidgetStatePropertyAll(
+          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        ),
+      ),
+      onPressed: whenPressed,
+      child: Text(
+        '$text',
+        style: TextStyle(
+          fontFamily: 'BabasNeue',
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
+}
+
+class BorderedButton extends StatelessWidget {
+  final String text;
+  final Function() whenPressed;
+  const BorderedButton({
+    super.key,
+    required this.text,
+    required this.whenPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      style: ButtonStyle(
+        side: WidgetStatePropertyAll(BorderSide(color: primaryColor, width: 2)),
+        backgroundColor: WidgetStatePropertyAll(Colors.transparent),
+        foregroundColor: WidgetStatePropertyAll(primaryColor),
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        ),
+        padding: WidgetStatePropertyAll(
+          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        ),
+      ),
+      onPressed: whenPressed,
+      child: Text(
+        '$text',
+        style: TextStyle(
+          fontFamily: 'BabasNeue',
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
+}

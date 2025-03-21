@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/screens/accountdetails.dart';
 import 'package:passwords_manager/screens/addnew.dart';
+import 'package:passwords_manager/screens/generatenew.dart';
 import 'package:passwords_manager/screens/homescreen.dart';
 import 'package:passwords_manager/screens/splash.dart';
 import 'package:passwords_manager/screens/update.dart';
@@ -49,6 +50,7 @@ class _MyAppState extends State<MyApp> {
         '/accountdetails': (context) => Accountdetails(),
         '/update': (context) => Update(),
         '/addnew': (context) => Addnew(),
+        '/generatenew': (context) => Generatenew(),
       },
       theme: lightTheme,
       darkTheme: darkTheme,

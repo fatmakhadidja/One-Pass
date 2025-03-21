@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:passwords_manager/core/utils.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'package:flutter/services.dart';
 
@@ -64,62 +65,15 @@ class _AccountdetailsState extends State<Accountdetails> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width * 0.4,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(primaryColor),
-                        foregroundColor: WidgetStatePropertyAll(Colors.white),
-                        shape: WidgetStatePropertyAll(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        padding: WidgetStatePropertyAll(
-                          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                        ),
-                      ),
-                      child: Text(
-                        'Delete',
-                        style: TextStyle(
-                          fontFamily: 'BabasNeue',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
+                    child: ColoredButton(text: 'Delete', whenPressed: () {}),
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.4,
-                    child: OutlinedButton(
-                      style: ButtonStyle(
-                        side: WidgetStatePropertyAll(
-                          BorderSide(color: primaryColor, width: 2),
-                        ),
-                        backgroundColor: WidgetStatePropertyAll(
-                          Colors.transparent,
-                        ),
-                        foregroundColor: WidgetStatePropertyAll(primaryColor),
-                        shape: WidgetStatePropertyAll(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        padding: WidgetStatePropertyAll(
-                          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                        ),
-                      ),
-                      onPressed: () {
+                    child: BorderedButton(
+                      text: 'Update',
+                      whenPressed: () {
                         Navigator.pushNamed(context, '/update');
                       },
-
-                      child: Text(
-                        'Update',
-                        style: TextStyle(
-                          fontFamily: 'BabasNeue',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
                     ),
                   ),
                 ],
