@@ -64,11 +64,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
           child: Column(
+            
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
