@@ -10,16 +10,13 @@ class Accountdetails extends StatefulWidget {
 }
 
 class _AccountdetailsState extends State<Accountdetails> {
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+          padding: const EdgeInsets.fromLTRB(20, 8, 20, 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -60,6 +57,70 @@ class _AccountdetailsState extends State<Accountdetails> {
                 passwordtext: 'fuck off',
                 password: true,
               ),
+              Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(primaryColor),
+                        foregroundColor: WidgetStatePropertyAll(Colors.white),
+                        shape: WidgetStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        padding: WidgetStatePropertyAll(
+                          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                        ),
+                      ),
+                      child: Text(
+                        'Delete',
+                        style: TextStyle(
+                          fontFamily: 'BabasNeue',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: OutlinedButton(
+                      style: ButtonStyle(
+                        side: WidgetStatePropertyAll(
+                          BorderSide(color: primaryColor, width: 2),
+                        ),
+                        backgroundColor: WidgetStatePropertyAll(
+                          Colors.transparent,
+                        ),
+                        foregroundColor: WidgetStatePropertyAll(primaryColor),
+                        shape: WidgetStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        padding: WidgetStatePropertyAll(
+                          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                        ),
+                      ),
+                      onPressed: () {},
+
+                      child: Text(
+                        'Update',
+                        style: TextStyle(
+                          fontFamily: 'BabasNeue',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
@@ -87,16 +148,17 @@ class DetailsRow extends StatefulWidget {
 
 class _DetailsRowState extends State<DetailsRow> {
   bool showPassword = false;
-    void copyToClipboard(String text) {
+  void copyToClipboard(String text) {
     Clipboard.setData(ClipboardData(text: text));
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        elevation :5,
+        elevation: 5,
         content: Text("Copied to clipboard!"),
         duration: Duration(seconds: 1),
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
