@@ -114,10 +114,17 @@ class _GeneratenewState extends State<Generatenew> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 15),
+                      SizedBox(height: 30),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            child: ColoredButton(
+                              text: 'add new',
+                              whenPressed: () {},
+                            ),
+                          ),
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: BorderedButton(
@@ -130,14 +137,6 @@ class _GeneratenewState extends State<Generatenew> {
                     ],
                   ),
                 ),
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: ColoredButton(text: 'add new', whenPressed: () {}),
               ),
             ),
           ],
