@@ -69,7 +69,6 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
           child: Column(
-
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -186,7 +185,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/addnew');
+        },
         backgroundColor: Colors.redAccent, // Red color
         child: Icon(Icons.add, size: 30, color: Colors.white),
       ),
