@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
+import 'package:flutter/services.dart';
 
 class Accountdetails extends StatefulWidget {
   const Accountdetails({super.key});
@@ -9,6 +10,9 @@ class Accountdetails extends StatefulWidget {
 }
 
 class _AccountdetailsState extends State<Accountdetails> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,6 +87,16 @@ class DetailsRow extends StatefulWidget {
 
 class _DetailsRowState extends State<DetailsRow> {
   bool showPassword = false;
+    void copyToClipboard(String text) {
+    Clipboard.setData(ClipboardData(text: text));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        elevation :5,
+        content: Text("Copied to clipboard!"),
+        duration: Duration(seconds: 1),
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -103,17 +117,21 @@ class _DetailsRowState extends State<DetailsRow> {
               Row(
                 children: [
                   IconButton(
-                    icon: Icon(showPassword ? Icons.visibility : Icons.visibility_off, color: primaryColor),
+                    icon: Icon(
+                      showPassword ? Icons.visibility : Icons.visibility_off,
+                      color: primaryColor,
+                    ),
                     onPressed: () {
                       setState(() {
-                        showPassword = !showPassword; // Toggle password visibility
+                        showPassword =
+                            !showPassword; // Toggle password visibility
                       });
                     },
                   ),
                   IconButton(
                     icon: Icon(Icons.copy, color: primaryColor),
                     onPressed: () {
-                      // Copy functionality here
+                      copyToClipboard(widget.passwordtext);
                     },
                   ),
                 ],

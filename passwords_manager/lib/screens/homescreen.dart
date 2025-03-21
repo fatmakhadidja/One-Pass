@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import '../core/utils.dart';
-
 import 'package:passwords_manager/main.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -70,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
           child: Column(
-            
+
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,

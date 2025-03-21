@@ -74,7 +74,7 @@ class PasswordContainer extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: Text(
                   '$text',
-                  style: Theme.of(context).textTheme.titleMedium
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),
             ],
