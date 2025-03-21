@@ -74,11 +74,7 @@ class PasswordContainer extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: Text(
                   '$text',
-                  style: TextStyle(
-                    color: secondaryColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium
                 ),
               ),
             ],
@@ -142,40 +138,48 @@ class AccountContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.101,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, '/accountdetails');
+      },
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.101,
 
-      decoration: BoxDecoration(
-        border: Border.all(color: Color(0xffF1F1F1), width: 2),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.15,
-                  height: MediaQuery.of(context).size.width * 0.15,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).secondaryHeaderColor,
-                    borderRadius: BorderRadius.circular(10),
+        decoration: BoxDecoration(
+          border: Border.all(color: Color(0xffF1F1F1), width: 2),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.15,
+                    height: MediaQuery.of(context).size.width * 0.15,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).secondaryHeaderColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Icon(icon, color: Theme.of(context).hintColor),
+                    ),
                   ),
-                  child: Center(
-                    child: Icon(icon, color: Theme.of(context).hintColor),
+                  SizedBox(width: 15),
+                  Text(
+                    '$account',
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
-                ),
-                SizedBox(width: 15),
-                Text('$account', style: Theme.of(context).textTheme.titleLarge),
-              ],
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.copy, color: primaryColor),
-            ),
-          ],
+                ],
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.copy, color: primaryColor),
+              ),
+            ],
+          ),
         ),
       ),
     );
