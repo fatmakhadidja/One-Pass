@@ -8,7 +8,7 @@ ThemeData lightTheme = ThemeData(
   hintColor: Colors.white,
   scaffoldBackgroundColor: Colors.white,
   primaryColor: Color(0xfff1f1f1),
-  package: 'white.png',
+  indicatorColor: Color(0xffF1F1F1),
   secondaryHeaderColor: secondaryColor,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
@@ -50,6 +50,7 @@ ThemeData lightTheme = ThemeData(
       color: secondaryColor,
       fontSize: 16,
       fontWeight: FontWeight.w500,
+      fontFamily: 'BabasNeue',
     ),
   ),
 );
@@ -59,7 +60,7 @@ ThemeData darkTheme = ThemeData(
   scaffoldBackgroundColor: secondaryColor,
   primaryColor: secondaryColor,
   hintColor: primaryColor,
-  package: 'red.png',
+ indicatorColor: Colors.white,
   secondaryHeaderColor: Colors.white,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
@@ -100,6 +101,7 @@ ThemeData darkTheme = ThemeData(
     titleMedium: TextStyle(
       color: Colors.white,
       fontSize: 16,
+      fontFamily: 'BabasNeue',
       fontWeight: FontWeight.w500,
     ),
   ),

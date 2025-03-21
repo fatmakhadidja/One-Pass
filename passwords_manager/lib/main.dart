@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:passwords_manager/screens/accountdetails.dart';
 import 'package:passwords_manager/screens/homescreen.dart';
 import 'package:passwords_manager/screens/splash.dart';
+import 'package:passwords_manager/screens/update.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'package:passwords_manager/theme/theme_manager.dart';
 
-
 void main() async {
-
-  WidgetsFlutterBinding.ensureInitialized(); 
+  WidgetsFlutterBinding.ensureInitialized();
   await themeManager.loadTheme();
   runApp(const MyApp());
 }
@@ -23,8 +22,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  
-    @override
+  @override
   void initState() {
     themeManager.addListener(themeListner);
     super.initState();
@@ -45,8 +43,11 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {'/home': (context) => HomeScreen(),
-      '/accountdetails' :  (context) => Accountdetails()},
+      routes: {
+        '/home': (context) => HomeScreen(),
+        '/accountdetails': (context) => Accountdetails(),
+        '/update': (context) => Update(),
+      },
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeManager.themeMode,

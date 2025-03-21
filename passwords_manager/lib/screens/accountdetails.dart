@@ -13,6 +13,7 @@ class _AccountdetailsState extends State<Accountdetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
@@ -107,7 +108,9 @@ class _AccountdetailsState extends State<Accountdetails> {
                           EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/update');
+                      },
 
                       child: Text(
                         'Update',
