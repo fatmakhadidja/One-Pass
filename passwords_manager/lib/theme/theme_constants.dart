@@ -7,7 +7,7 @@ ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   hintColor: Colors.white,
   scaffoldBackgroundColor: Colors.white,
-  primaryColor: Colors.white,
+  primaryColor: Color(0xfff1f1f1),
   package: 'white.png',
   secondaryHeaderColor: secondaryColor,
   elevatedButtonTheme: ElevatedButtonThemeData(
