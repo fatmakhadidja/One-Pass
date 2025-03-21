@@ -92,7 +92,6 @@ class OnboardingPage extends StatefulWidget {
   final String highlighted;
   final String subtitle;
   final String description;
-
   final int currentIndex;
   final bool isLast;
 
