@@ -73,7 +73,7 @@ class PasswordContainer extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: Text(
-                  '$text',
+                  text,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),
@@ -169,7 +169,7 @@ class AccountContainer extends StatelessWidget {
                   ),
                   SizedBox(width: 15),
                   Text(
-                    '$account',
+                    account,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ],
@@ -211,7 +211,7 @@ class ColoredButton extends StatelessWidget {
       ),
       onPressed: whenPressed,
       child: Text(
-        '$text',
+        text,
         style: TextStyle(
           fontFamily: 'BabasNeue',
           fontSize: 16,
@@ -247,7 +247,7 @@ class BorderedButton extends StatelessWidget {
       ),
       onPressed: whenPressed,
       child: Text(
-        '$text',
+        text,
         style: TextStyle(
           fontFamily: 'BabasNeue',
           fontSize: 16,
