@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:passwords_manager/core/utils.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 
-
 class Accountdetails extends StatefulWidget {
   const Accountdetails({super.key});
 
@@ -65,7 +64,12 @@ class _AccountdetailsState extends State<Accountdetails> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width * 0.4,
-                    child: ColoredButton(text: 'Delete', whenPressed: () {}),
+                    child: ColoredButton(
+                      text: 'Delete',
+                      whenPressed: () {
+                        confirmDeletion(context);
+                      },
+                    ),
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.4,
@@ -105,7 +109,6 @@ class DetailsRow extends StatefulWidget {
 
 class _DetailsRowState extends State<DetailsRow> {
   bool showPassword = false;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +144,7 @@ class _DetailsRowState extends State<DetailsRow> {
                   IconButton(
                     icon: Icon(Icons.copy, color: primaryColor),
                     onPressed: () {
-                      copyToClipboard(widget.passwordtext,context);
+                      copyToClipboard(widget.passwordtext, context);
                     },
                   ),
                 ],

@@ -261,13 +261,62 @@ class BorderedButton extends StatelessWidget {
   }
 }
 
-void copyToClipboard(String text,BuildContext context) {
-    Clipboard.setData(ClipboardData(text: text));
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        elevation: 5,
-        content: Text("Copied to clipboard!"),
-        duration: Duration(seconds: 1),
-      ),
-    );
-  }
+void copyToClipboard(String text, BuildContext context) {
+  Clipboard.setData(ClipboardData(text: text));
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      elevation: 5,
+      content: Text("Copied to clipboard!"),
+      duration: Duration(seconds: 1),
+    ),
+  );
+}
+
+void confirmDeletion(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(
+          "Confirm Deletion",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            fontFamily: 'BabasNeue',
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        content: Text(
+          "Are you sure you want to delete this account?",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            child: Text(
+              "Cancel",
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              // Perform deletion logic here
+              Navigator.of(context).pop(); // Close the dialog after deletion
+            },
+            child: Text(
+              "Delete",
+              style: TextStyle(
+                color: primaryColor,
+                fontSize: 16,
+                fontFamily: 'BabasNeue',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ],
+      );
+    },
+  );
+}
