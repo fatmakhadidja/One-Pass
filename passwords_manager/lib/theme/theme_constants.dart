@@ -40,10 +40,12 @@ ThemeData lightTheme = ThemeData(
       color: Color(0xffBABABA),
       fontSize: 14,
       fontWeight: FontWeight.normal,
+      fontFamily: 'BabasNeue',
     ),
     titleLarge: TextStyle(
       color: secondaryColor,
       fontSize: 20,
+      fontFamily: 'BabasNeue',
       fontWeight: FontWeight.w500,
     ),
     titleMedium: TextStyle(
@@ -92,10 +94,12 @@ ThemeData darkTheme = ThemeData(
       color: Colors.white,
       fontSize: 14,
       fontWeight: FontWeight.w500,
+      fontFamily: 'BabasNeue',
     ),
     titleLarge: TextStyle(
       color: Colors.white,
       fontSize: 20,
+      fontFamily: 'BabasNeue',
       fontWeight: FontWeight.w500,
     ),
     titleMedium: TextStyle(
