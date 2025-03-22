@@ -13,7 +13,6 @@ class _AddnewState extends State<Addnew> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
@@ -44,11 +43,14 @@ class _AddnewState extends State<Addnew> {
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       SizedBox(height: 100),
-                      AddRows(title: 'NAME', description: 'Facebook'),
+                      AddRows(title: 'NAME', description: 'Enter account name'),
                       SizedBox(height: 40),
-                      AddRows(title: 'EMAIL/USERNAME', description: 'Facebook'),
+                      AddRows(
+                        title: 'EMAIL/USERNAME',
+                        description: 'Enter email/username',
+                      ),
                       SizedBox(height: 40),
-                      AddRows(title: 'PASSWORD', description: 'Facebook'),
+                      AddRows(title: 'PASSWORD', description: 'Enter password'),
                       SizedBox(height: 40),
 
                       Row(
@@ -70,20 +72,19 @@ class _AddnewState extends State<Addnew> {
                 ),
               ),
             ),
-
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: ColoredButton(
-                  text: 'Add new',
-                  whenPressed: () {
-                    Navigator.pushNamed(context, '/addnew');
-                  },
-                ),
-              ),
-            ),
           ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(bottom: 20,left: 10,right: 10),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.8,
+          child: ColoredButton(
+            text: 'Add new',
+            whenPressed: () {
+              Navigator.pushNamed(context, '/addnew');
+            },
+          ),
         ),
       ),
     );

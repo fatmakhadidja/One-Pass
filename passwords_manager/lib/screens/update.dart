@@ -75,14 +75,20 @@ class _UpdateState extends State<Update> {
               ),
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: ColoredButton(text: 'Save changes', whenPressed: () {}),
-              ),
-            ),
+           
           ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(bottom: 20,left: 10,right: 10),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.8,
+          child: ColoredButton(
+            text: 'Save changes',
+            whenPressed: () {
+              Navigator.pushNamed(context, '/addnew');
+            },
+          ),
         ),
       ),
     );
