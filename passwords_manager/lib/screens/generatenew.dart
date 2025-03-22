@@ -66,9 +66,10 @@ class _GeneratenewState extends State<Generatenew> {
                                         value: length,
                                         child: Text(
                                           length.toString(),
-                                          style: TextStyle(
-                                            color: Colors.grey.shade700,
-                                          ),
+                                          style:
+                                              Theme.of(
+                                                context,
+                                              ).textTheme.titleMedium,
                                         ),
                                       ),
                                     )
@@ -118,7 +119,6 @@ class _GeneratenewState extends State<Generatenew> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: BorderedButton(
