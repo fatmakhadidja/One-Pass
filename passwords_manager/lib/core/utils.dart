@@ -74,7 +74,12 @@ class PasswordContainer extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: Text(
                   text,
-                  style: Theme.of(context).textTheme.titleMedium,
+                  style: TextStyle(
+                    color: secondaryColor,
+                    fontFamily: 'BabasNeue',
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
               ),
             ],
@@ -168,10 +173,7 @@ class AccountContainer extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 15),
-                  Text(
-                    account,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
+                  Text(account, style: Theme.of(context).textTheme.titleLarge),
                 ],
               ),
               IconButton(
