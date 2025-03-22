@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
+import 'package:flutter/services.dart';
 
 class CountButton extends StatefulWidget {
   final Color clr;
@@ -259,3 +260,14 @@ class BorderedButton extends StatelessWidget {
     );
   }
 }
+
+void copyToClipboard(String text,BuildContext context) {
+    Clipboard.setData(ClipboardData(text: text));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        elevation: 5,
+        content: Text("Copied to clipboard!"),
+        duration: Duration(seconds: 1),
+      ),
+    );
+  }
