@@ -277,6 +277,7 @@ void confirmDeletion(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text(
           "Confirm Deletion",
           style: TextStyle(
