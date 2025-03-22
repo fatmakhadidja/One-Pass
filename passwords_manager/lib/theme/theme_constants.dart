@@ -58,9 +58,9 @@ ThemeData lightTheme = ThemeData(
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   scaffoldBackgroundColor: secondaryColor,
-  primaryColor: secondaryColor,
+  primaryColor: Color(0xff696E87),
   hintColor: primaryColor,
- indicatorColor: Colors.white,
+  indicatorColor: Colors.white,
   secondaryHeaderColor: Colors.white,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(

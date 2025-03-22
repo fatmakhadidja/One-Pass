@@ -139,57 +139,66 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 8.0,
-        elevation: 5,
-        color: Theme.of(context).primaryColor, // Light grey background
+      bottomNavigationBar: ClipRRect(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(30), // Adjust the radius as needed
+        ),
+        child: BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          notchMargin: 8.0,
+          elevation: 5,
+          color: Theme.of(context).primaryColor, // Light grey background
 
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    _selectedindex = 0;
-                  });
-                },
-                icon: Icon(
-                  Icons.home,
-                  color:
-                      _selectedindex == 0
-                          ? primaryColor
-                          : Theme.of(context).secondaryHeaderColor,
-                  size: 30,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _selectedindex = 0;
+                    });
+                  },
+                  icon: Icon(
+                    Icons.home,
+                    color:
+                        _selectedindex == 0
+                            ? primaryColor
+                            : Theme.of(context).secondaryHeaderColor,
+                    size: 30,
+                  ),
                 ),
-              ),
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    _selectedindex = 1;
-                  });
-                },
-                icon: Icon(
-                  Icons.person,
-                  color:
-                      _selectedindex == 1
-                          ? primaryColor
-                          : Theme.of(context).secondaryHeaderColor,
-                  size: 30,
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _selectedindex = 1;
+                    });
+                  },
+                  icon: Icon(
+                    Icons.person,
+                    color:
+                        _selectedindex == 1
+                            ? primaryColor
+                            : Theme.of(context).secondaryHeaderColor,
+                    size: 30,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/addnew');
-        },
-        backgroundColor: Colors.redAccent, // Red color
-        child: Icon(Icons.add, size: 30, color: Colors.white),
+
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/addnew');
+          },
+          backgroundColor: Colors.redAccent, // Red color
+          child: Icon(Icons.add, size: 30, color: Colors.white),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

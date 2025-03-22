@@ -80,7 +80,7 @@ class _UpdateState extends State<Update> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 20,left: 10,right: 10),
+        padding: const EdgeInsets.only(bottom: 20,left: 30,right: 30),
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.8,
           child: ColoredButton(
