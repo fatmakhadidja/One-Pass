@@ -192,7 +192,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
+
         child: FloatingActionButton(
+          shape: CircleBorder(),
           onPressed: () {
             Navigator.pushNamed(context, '/addnew');
           },
