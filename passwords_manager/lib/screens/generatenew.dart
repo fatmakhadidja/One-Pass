@@ -10,6 +10,7 @@ class Generatenew extends StatefulWidget {
 }
 
 class _GeneratenewState extends State<Generatenew> {
+  String generatedPassword = 'ghstdhshd';
   int selectedLength = 8;
   String includeSymbols = 'No';
   @override
@@ -46,7 +47,7 @@ class _GeneratenewState extends State<Generatenew> {
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       SizedBox(height: 100),
-                      GenerateNewTextField(),
+                      GenerateNewTextField(generatedPassword: generatedPassword,),
                       SizedBox(height: 40),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +131,8 @@ class _GeneratenewState extends State<Generatenew> {
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: ColoredButton(
                               text: 'Copy',
-                              whenPressed: () {},
+                              whenPressed: () {copyToClipboard(generatedPassword,context);},
+                  
                             ),
                           ),
                         ],
@@ -147,17 +149,30 @@ class _GeneratenewState extends State<Generatenew> {
   }
 }
 
+// ignore: must_be_immutable
 class GenerateNewTextField extends StatefulWidget {
-  const GenerateNewTextField({super.key});
+  String generatedPassword;
+  GenerateNewTextField({super.key,required this.generatedPassword});
 
   @override
   State<GenerateNewTextField> createState() => _GenerateNewTextFieldState();
 }
 
 class _GenerateNewTextFieldState extends State<GenerateNewTextField> {
-  TextEditingController mycontroller = TextEditingController(
-    text: 'kshdysncge',
-  );
+ late TextEditingController mycontroller;
+
+  @override
+  void initState() {
+    super.initState();
+    mycontroller = TextEditingController(text: widget.generatedPassword);
+  }
+
+  @override
+  void dispose() {
+    mycontroller.dispose(); // Dispose the controller to free resources
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextField(

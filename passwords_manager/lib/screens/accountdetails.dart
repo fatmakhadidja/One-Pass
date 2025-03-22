@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/core/utils.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
-import 'package:flutter/services.dart';
+
 
 class Accountdetails extends StatefulWidget {
   const Accountdetails({super.key});
@@ -105,16 +105,7 @@ class DetailsRow extends StatefulWidget {
 
 class _DetailsRowState extends State<DetailsRow> {
   bool showPassword = false;
-  void copyToClipboard(String text) {
-    Clipboard.setData(ClipboardData(text: text));
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        elevation: 5,
-        content: Text("Copied to clipboard!"),
-        duration: Duration(seconds: 1),
-      ),
-    );
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +141,7 @@ class _DetailsRowState extends State<DetailsRow> {
                   IconButton(
                     icon: Icon(Icons.copy, color: primaryColor),
                     onPressed: () {
-                      copyToClipboard(widget.passwordtext);
+                      copyToClipboard(widget.passwordtext,context);
                     },
                   ),
                 ],
