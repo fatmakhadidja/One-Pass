@@ -52,7 +52,7 @@ class PasswordContainer extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.2,
       width: MediaQuery.of(context).size.width * 0.45,
       decoration: BoxDecoration(
-        color: Color(0xffF1F1F1),
+        color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Padding(
@@ -76,7 +76,7 @@ class PasswordContainer extends StatelessWidget {
                 child: Text(
                   text,
                   style: TextStyle(
-                    color: secondaryColor,
+                    color: Theme.of(context).secondaryHeaderColor,
                     fontFamily: 'BabasNeue',
                     fontSize: 14,
                     fontWeight: FontWeight.normal,
