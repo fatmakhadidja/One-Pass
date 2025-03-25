@@ -54,6 +54,12 @@ ThemeData lightTheme = ThemeData(
       fontWeight: FontWeight.w500,
       fontFamily: 'BabasNeue',
     ),
+    titleSmall: TextStyle(
+      color: secondaryColor,
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Poppins',
+    ),
   ),
 );
 
@@ -107,6 +113,12 @@ ThemeData darkTheme = ThemeData(
       fontSize: 16,
       fontFamily: 'BabasNeue',
       fontWeight: FontWeight.w500,
+    ),
+    titleSmall: TextStyle(
+      color: Colors.white,
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Poppins',
     ),
   ),
 );
