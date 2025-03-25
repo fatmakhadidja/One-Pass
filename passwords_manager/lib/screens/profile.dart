@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/main.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
@@ -43,6 +41,7 @@ class _ProfileState extends State<Profile> {
                 await themeManager.toggleTheme(
                   themeManager.themeMode == ThemeMode.dark,
                 );
+                setState(() {});
               },
             ),
           ],
@@ -76,7 +75,6 @@ class _ProfileButtonState extends State<ProfileButton> {
         await themeManager.toggleTheme(
           themeManager.themeMode == ThemeMode.dark,
         );
-        setState(() {});
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
