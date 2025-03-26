@@ -4,7 +4,6 @@ import 'package:passwords_manager/screens/addnew.dart';
 import 'package:passwords_manager/screens/generatenew.dart';
 import 'package:passwords_manager/screens/homescreen.dart';
 import 'package:passwords_manager/screens/profile.dart';
-import 'package:passwords_manager/screens/splash.dart';
 import 'package:passwords_manager/screens/update.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'package:passwords_manager/theme/theme_manager.dart';

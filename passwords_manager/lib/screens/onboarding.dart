@@ -68,7 +68,7 @@ class SecondScreen extends StatelessWidget {
 }
 
 class ThirdScreen extends StatelessWidget {
-  ThirdScreen({super.key});
+  const ThirdScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

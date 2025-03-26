@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     {'icon': Icons.facebook, 'account': 'Facebook'},
     {'icon': Icons.facebook, 'account': 'Facebook'},
   ];
-  FocusNode _focusNode = FocusNode();
+  final FocusNode _focusNode = FocusNode();
   Color borderColor = Color(0xffF1F1F1);
 
   @override
