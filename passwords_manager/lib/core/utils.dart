@@ -332,7 +332,6 @@ class CustomPasswordField extends StatefulWidget {
     required this.controller,
     required this.label,
     required this.hint,
-   
   });
 
   @override
@@ -355,19 +354,11 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
           return Theme.of(context).secondaryHeaderColor;
         }),
         floatingLabelBehavior: FloatingLabelBehavior.always,
+
         hintText: widget.hint,
-        hintStyle: TextStyle(
-          fontSize: 12,
-          fontFamily: 'Roboto',
-          color: Theme.of(context).secondaryHeaderColor,
-        ),
+        hintStyle: Theme.of(context).textTheme.titleMedium,
         labelText: widget.label,
-        labelStyle: TextStyle(
-          color: Theme.of(context).secondaryHeaderColor,
-          fontSize: 18,
-          fontFamily: 'Roboto',
-          fontWeight: FontWeight.w500,
-        ),
+        labelStyle: Theme.of(context).textTheme.titleMedium,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(5)),
           borderSide: BorderSide(
