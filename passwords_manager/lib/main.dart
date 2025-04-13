@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeManager.themeMode,
-      home: Profile(),
+      home: SplashScreen(),
     );
   }
 }

@@ -81,14 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Image.asset('assets/images/logo.png'),
                     ),
                   ),
-
-                  Switch(
-                    value: themeManager.themeMode == ThemeMode.dark,
-                    onChanged: (bool isDark) async {
-                      await themeManager.toggleTheme(isDark);
-                      setState(() {});
-                    },
-                  ),
                 ],
               ),
               SizedBox(height: 10),
