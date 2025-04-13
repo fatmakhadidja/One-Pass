@@ -169,13 +169,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               ),
             ],
           ),
-          // Switch(
-          //   value: themeManager.themeMode == ThemeMode.dark,
-          //   onChanged: (bool isDark) async {
-          //     await themeManager.toggleTheme(isDark);
-          //     setState(() {});
-          //   },
-          // ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -193,7 +187,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               widget.isLast
                   ? ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/home');
+                      Navigator.pushNamed(context, '/register');
                     },
                     style: ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll(primaryColor),

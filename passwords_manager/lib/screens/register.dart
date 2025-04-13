@@ -36,9 +36,12 @@ class _RegisterState extends State<Register> {
 
   void _handleRegister() {
     if (myController1.text.trim().isEmpty ||
-        myController2.text.trim().isEmpty || myController3.text.trim().isEmpty) {
+        myController2.text.trim().isEmpty ||
+        myController3.text.trim().isEmpty) {
       _showEmptyFieldPopup();
-    } 
+    } else {
+      Navigator.pushReplacementNamed(context, '/home');
+    }
   }
 
   @override

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/screens/authentificate.dart';
-import 'package:passwords_manager/screens/homescreen.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'onboarding.dart';
 import 'package:loading_indicator/loading_indicator.dart';
