@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import '../core/utils.dart';
-import 'package:passwords_manager/main.dart';
+
 import 'package:passwords_manager/screens/profile.dart';
 
 class HomeScreen extends StatefulWidget {
