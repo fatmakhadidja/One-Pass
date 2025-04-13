@@ -34,7 +34,7 @@ class _ProfileState extends State<Profile> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
-                width: MediaQuery.of(context).size.width*0.9,
+                width: MediaQuery.of(context).size.width * 0.9,
                 child: Text(
                   'PROFILE',
                   style: Theme.of(context).textTheme.headlineLarge,
@@ -42,32 +42,38 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.2),
-            ProfileButton(
-              onPress: () {
-                Navigator.pushNamed(context, '/changePassword');
-              },
-              buttonText: 'Change your main password',
-              prefix: Icon(Icons.lock, color: primaryColor),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ProfileButton(
+                onPress: () {
+                  Navigator.pushNamed(context, '/changePassword');
+                },
+                buttonText: 'Change your main password',
+                prefix: Icon(Icons.lock, color: primaryColor),
+              ),
             ),
 
             SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-            ProfileButton(
-              onPress: () {},
-              buttonText: 'Switch mode',
-              prefix: SizedBox(
-                width: 50,
-                height: 50,
-                child: Switch(
-                  value: themeManager.themeMode == ThemeMode.dark,
-                  onChanged: (bool isDark) async {
-                    await themeManager.toggleTheme(isDark);
-                    setState(() {});
-                  },
-                  activeColor: primaryColor,
-                  activeTrackColor: Color.fromARGB(255, 235, 182, 182),
-                  inactiveThumbColor: secondaryColor,
-                  inactiveTrackColor: Colors.white,
-                  splashRadius: 20.0,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ProfileButton(
+                onPress: () {},
+                buttonText: 'Switch mode',
+                prefix: SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: Switch(
+                    value: themeManager.themeMode == ThemeMode.dark,
+                    onChanged: (bool isDark) async {
+                      await themeManager.toggleTheme(isDark);
+                      setState(() {});
+                    },
+                    activeColor: primaryColor,
+                    activeTrackColor: Color.fromARGB(255, 235, 182, 182),
+                    inactiveThumbColor: secondaryColor,
+                    inactiveTrackColor: Colors.white,
+                    splashRadius: 20.0,
+                  ),
                 ),
               ),
             ),
