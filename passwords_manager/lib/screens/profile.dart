@@ -28,21 +28,28 @@ class _ProfileState extends State<Profile> {
             SizedBox(height: MediaQuery.of(context).size.height * 0.2),
             ProfileButton(
               buttonText: 'Change your main password',
-              icon: Icons.lock,
-              function: () async {},
+              prefix: Icon(Icons.lock, color: primaryColor),
             ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             ProfileButton(
               buttonText: 'Switch mode',
-              icon:
-                  themeManager.themeMode == ThemeMode.light
-                      ? Icons.dark_mode
-                      : Icons.light_mode,
-              function: () async {
-                await themeManager.toggleTheme(
-                  themeManager.themeMode == ThemeMode.dark,
-                );
-                setState(() {});
-              },
+              prefix: SizedBox(
+                width: 50,
+                height: 50,
+                child: Switch(
+                  value: themeManager.themeMode == ThemeMode.dark,
+                  onChanged: (bool isDark) async {
+                    await themeManager.toggleTheme(isDark);
+                    setState(() {});
+                  },
+                  activeColor: primaryColor, 
+                  activeTrackColor: Color.fromARGB(255, 235, 182, 182), 
+                  inactiveThumbColor: secondaryColor, 
+                  inactiveTrackColor:
+                      Colors.white ,
+                  splashRadius: 20.0,
+                ),
+              ),
             ),
           ],
         ),
@@ -52,15 +59,13 @@ class _ProfileState extends State<Profile> {
 }
 
 class ProfileButton extends StatefulWidget {
-  final Future<void> Function() function;
   final String buttonText;
-  final IconData icon;
+  final Widget prefix;
 
   const ProfileButton({
     super.key,
     required this.buttonText,
-    required this.icon,
-    required this.function,
+    required this.prefix,
   });
 
   @override
@@ -71,15 +76,12 @@ class _ProfileButtonState extends State<ProfileButton> {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () async {
-        await themeManager.toggleTheme(
-          themeManager.themeMode == ThemeMode.dark,
-        );
-      },
+      onPressed: () {},
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Icon(widget.icon, color: primaryColor),
+          widget.prefix,
+          // Icon(widget.icon, color: primaryColor),
           SizedBox(width: 10),
           Text(
             widget.buttonText,

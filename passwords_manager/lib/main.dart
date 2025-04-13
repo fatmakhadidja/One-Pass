@@ -7,6 +7,7 @@ import 'package:passwords_manager/screens/profile.dart';
 import 'package:passwords_manager/screens/update.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'package:passwords_manager/theme/theme_manager.dart';
+import 'screens/splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
