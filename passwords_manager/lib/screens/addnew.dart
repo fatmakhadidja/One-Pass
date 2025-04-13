@@ -76,15 +76,10 @@ class _AddnewState extends State<Addnew> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 20,left: 30,right: 30),
+        padding: const EdgeInsets.only(bottom: 20, left: 30, right: 30),
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.8,
-          child: ColoredButton(
-            text: 'Add new',
-            whenPressed: () {
-              Navigator.pushNamed(context, '/addnew');
-            },
-          ),
+          child: ColoredButton(text: 'Add new', whenPressed: () {}),
         ),
       ),
     );
