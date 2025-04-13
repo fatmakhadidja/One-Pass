@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:passwords_manager/screens/authentificate.dart';
 import 'package:passwords_manager/screens/homescreen.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'onboarding.dart';
@@ -28,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (hasSeenOnboarding) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(builder: (context) => const Authentificate()),
       );
     } else {
       await prefs.setBool('hasSeenOnboarding', true);

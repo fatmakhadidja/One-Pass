@@ -38,9 +38,7 @@ class _AuthentificateState extends State<Authentificate> {
         myController2.text.trim().isEmpty) {
       _showEmptyFieldPopup();
     } else {
-      // Proceed with login
-      print("Username: ${myController1.text}");
-      print("Password: ${myController2.text}");
+      Navigator.pushReplacementNamed(context, '/home');
     }
   }
 
@@ -85,7 +83,7 @@ class _AuthentificateState extends State<Authentificate> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Let’s get you setup with a new account!',
+                    'Let’s get you secured now!',
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                 ),
