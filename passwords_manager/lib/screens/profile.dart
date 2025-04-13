@@ -56,13 +56,9 @@ class _ProfileState extends State<Profile> {
             SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ProfileButton(
-                onPress: () {},
-                buttonText: 'Switch mode',
-                prefix: SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: Switch(
+              child: Row(
+                children: [
+                  Switch(
                     value: themeManager.themeMode == ThemeMode.dark,
                     onChanged: (bool isDark) async {
                       await themeManager.toggleTheme(isDark);
@@ -74,7 +70,12 @@ class _ProfileState extends State<Profile> {
                     inactiveTrackColor: Colors.white,
                     splashRadius: 20.0,
                   ),
-                ),
+                  SizedBox(width: 20),
+                  Text(
+                    'Switch mode',
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                ],
               ),
             ),
           ],
