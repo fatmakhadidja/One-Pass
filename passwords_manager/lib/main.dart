@@ -3,11 +3,13 @@ import 'package:passwords_manager/screens/accountdetails.dart';
 import 'package:passwords_manager/screens/addnew.dart';
 import 'package:passwords_manager/screens/generatenew.dart';
 import 'package:passwords_manager/screens/homescreen.dart';
+import 'package:passwords_manager/screens/register.dart';
 import 'package:passwords_manager/screens/update.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'package:passwords_manager/theme/theme_manager.dart';
 import 'screens/splash.dart';
 import 'screens/changepassword.dart';
+import 'screens/login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,7 +59,7 @@ class _MyAppState extends State<MyApp> {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeManager.themeMode,
-      home: SplashScreen(),
+      home: Register(),
     );
   }
 }

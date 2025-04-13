@@ -385,3 +385,91 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
     );
   }
 }
+
+class AddRows extends StatelessWidget {
+  final String title;
+  final String description;
+  const AddRows({super.key, required this.title, required this.description});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: Theme.of(context).textTheme.titleMedium),
+        TextField(
+          decoration: InputDecoration(
+            labelText: description,
+            labelStyle: TextStyle(
+              color: Color(0xffBABABA),
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'BabasNeue',
+            ),
+            floatingLabelBehavior: FloatingLabelBehavior.never,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: Theme.of(context).indicatorColor,
+                width: 2,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: Theme.of(context).indicatorColor,
+                width: 2,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: primaryColor, width: 2),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class CustomTextField extends StatelessWidget {
+  final TextEditingController controller;
+  final String label;
+  final String hint;
+
+  const CustomTextField({
+    super.key,
+    required this.controller,
+    required this.label,
+    required this.hint,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        hintText: hint,
+        hintStyle: Theme.of(context).textTheme.titleMedium,
+        labelText: label,
+        labelStyle: Theme.of(context).textTheme.titleMedium,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          borderSide: BorderSide(
+            color: Theme.of(context).secondaryHeaderColor,
+            width: 1.25,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          borderSide: BorderSide(
+            color: primaryColor, // Make sure primaryColor is defined in your theme or globally
+            width: 1.25,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
