@@ -9,7 +9,7 @@ import 'package:passwords_manager/theme/theme_constants.dart';
 import 'package:passwords_manager/theme/theme_manager.dart';
 import 'screens/splash.dart';
 import 'screens/changepassword.dart';
-import 'screens/login.dart';
+import 'screens/authentificate.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,11 +55,13 @@ class _MyAppState extends State<MyApp> {
         '/addnew': (context) => Addnew(),
         '/generatenew': (context) => Generatenew(),
         '/changePassword': (context) => Changepassword(),
+        '/authentificate': (context) => Authentificate(),
+        '/register': (context) => Register(),
       },
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeManager.themeMode,
-      home: Register(),
+      home: SplashScreen(),
     );
   }
 }

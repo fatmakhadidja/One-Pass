@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:passwords_manager/core/utils.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Authentificate extends StatefulWidget {
+  const Authentificate({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Authentificate> createState() => _AuthentificateState();
 }
 
-class _LoginState extends State<Login> {
+class _AuthentificateState extends State<Authentificate> {
   TextEditingController myController1 = TextEditingController();
   TextEditingController myController2 = TextEditingController();
 
@@ -19,7 +19,10 @@ class _LoginState extends State<Login> {
       builder:
           (context) => AlertDialog(
             title: Text("Missing Fields"),
-            content: Text("Please fill in both username and password.",style: Theme.of(context).textTheme.headlineSmall,),
+            content: Text(
+              "Please fill in both username and password.",
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
             actions: [
               TextButton(
                 child: Text("OK", style: TextStyle(color: primaryColor)),
@@ -72,7 +75,7 @@ class _LoginState extends State<Login> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.9,
                         child: Text(
-                          'Login',
+                          'Get In',
                           style: Theme.of(context).textTheme.headlineLarge,
                         ),
                       ),
