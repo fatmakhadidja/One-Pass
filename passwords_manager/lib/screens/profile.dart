@@ -18,11 +18,27 @@ class _ProfileState extends State<Profile> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset('assets/images/logo.png'),
+                  ),
+                ),
+              ],
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'PROFILE',
-                style: Theme.of(context).textTheme.headlineLarge,
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width*0.9,
+                child: Text(
+                  'PROFILE',
+                  style: Theme.of(context).textTheme.headlineLarge,
+                ),
               ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.2),

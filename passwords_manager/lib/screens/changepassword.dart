@@ -18,14 +18,30 @@ class _ChangepasswordState extends State<Changepassword> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset('assets/images/logo.png'),
+                  ),
+                ),
+              ],
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    'Reset password',
-                    style: Theme.of(context).textTheme.headlineLarge,
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: Text(
+                      'Reset password',
+                      style: Theme.of(context).textTheme.headlineLarge,
+                    ),
                   ),
                 ],
               ),
@@ -35,11 +51,20 @@ class _ChangepasswordState extends State<Changepassword> {
               padding: const EdgeInsets.all(8.0),
               child: CustomPasswordField(
                 controller: myController,
-                label: 'Reset Password',
-                hint: 'Enter new password',
+                label: 'Current Password',
+                hint: 'Enter Current Password',
               ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomPasswordField(
+                controller: myController,
+                label: 'New Password',
+                hint: 'Enter new password',
+              ),
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.9,
               child: ColoredButton(text: 'Reset Password', whenPressed: () {}),
