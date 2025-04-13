@@ -7,6 +7,7 @@ import 'package:passwords_manager/screens/update.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'package:passwords_manager/theme/theme_manager.dart';
 import 'screens/splash.dart';
+import 'screens/changepassword.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,6 +52,7 @@ class _MyAppState extends State<MyApp> {
         '/update': (context) => Update(),
         '/addnew': (context) => Addnew(),
         '/generatenew': (context) => Generatenew(),
+        '/changePassword': (context) => Changepassword(),
       },
       theme: lightTheme,
       darkTheme: darkTheme,

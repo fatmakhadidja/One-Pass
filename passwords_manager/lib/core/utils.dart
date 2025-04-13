@@ -321,3 +321,76 @@ void confirmDeletion(BuildContext context) {
     },
   );
 }
+
+class CustomPasswordField extends StatefulWidget {
+  final TextEditingController controller;
+  final String label;
+  final String hint;
+
+  const CustomPasswordField({
+    super.key,
+    required this.controller,
+    required this.label,
+    required this.hint,
+   
+  });
+
+  @override
+  _CustomPasswordFieldState createState() => _CustomPasswordFieldState();
+}
+
+class _CustomPasswordFieldState extends State<CustomPasswordField> {
+  bool _isPasswordVisible = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      obscureText: !_isPasswordVisible,
+      controller: widget.controller,
+      decoration: InputDecoration(
+        suffixIconColor: WidgetStateColor.resolveWith((states) {
+          if (states.contains(WidgetState.focused)) {
+            return primaryColor;
+          }
+          return Theme.of(context).secondaryHeaderColor;
+        }),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        hintText: widget.hint,
+        hintStyle: TextStyle(
+          fontSize: 12,
+          fontFamily: 'Roboto',
+          color: Theme.of(context).secondaryHeaderColor,
+        ),
+        labelText: widget.label,
+        labelStyle: TextStyle(
+          color: Theme.of(context).secondaryHeaderColor,
+          fontSize: 18,
+          fontFamily: 'Roboto',
+          fontWeight: FontWeight.w500,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          borderSide: BorderSide(
+            color: Theme.of(context).secondaryHeaderColor,
+            width: 1.25,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          borderSide: BorderSide(color: primaryColor, width: 1.25),
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(
+            _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+          ),
+          iconSize: 20,
+          onPressed: () {
+            setState(() {
+              _isPasswordVisible = !_isPasswordVisible;
+            });
+          },
+        ),
+      ),
+    );
+  }
+}
