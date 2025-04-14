@@ -108,6 +108,20 @@ class SqlDB {
     // Execute DELETE query
     return response; // Return the number of affected rows
   }
+
+
+Future<int> getAccountsCount() async {
+  Database? mydb = await db; // Access the database instance
+  final result = await mydb!.rawQuery('SELECT COUNT(*) as count FROM accounts');
+  return Sqflite.firstIntValue(result) ?? 0; // Return the count or 0 if null
+}
+
+Future<int> getGeneratedCount() async {
+  Database? mydb = await db; // Access the database instance
+  final result = await mydb!.rawQuery('SELECT COUNT(*) as count FROM accounts WHERE generated == 1');
+  return Sqflite.firstIntValue(result) ?? 0; // Return the count or 0 if null
+}
+
 }
 
 final db = SqlDB();

@@ -24,6 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   Color borderColor = const Color(0xffF1F1F1);
+  Future<int> passwordsNumber = db.getAccountsCount();
+  Future<int> generatedNumber = db.getGeneratedCount();
 
   List<Map<String, dynamic>> accounts = [];
 
@@ -33,6 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     fetchAccounts();
+    passwordsNumber = db.getAccountsCount();
+    generatedNumber = db.getGeneratedCount();
     _searchController.addListener(() {
       final query = _searchController.text.toLowerCase();
       setState(() {
@@ -105,17 +109,55 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: const [
-                          PasswordContainer(
-                            number: 5,
-                            text: 'Stored \n passwords',
+                        children: [
+                          FutureBuilder<int>(
+                            future: passwordsNumber,
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const PasswordContainer(
+                                  number: 0,
+                                  text: 'Stored \n passwords',
+                                );
+                              } else if (snapshot.hasError) {
+                                return const PasswordContainer(
+                                  number: 0,
+                                  text: 'Stored \n passwords',
+                                );
+                              } else {
+                                return PasswordContainer(
+                                  number: snapshot.data ?? 0,
+                                  text: 'Stored \n passwords',
+                                );
+                              }
+                            },
                           ),
-                          PasswordContainer(
-                            number: 0,
-                            text: 'Generated\n passwords',
+
+                          FutureBuilder<int>(
+                            future: generatedNumber,
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const PasswordContainer(
+                                  number: 0,
+                                  text: 'Generated\n passwords',
+                                );
+                              } else if (snapshot.hasError) {
+                                return const PasswordContainer(
+                                  number: 0,
+                                  text: 'Generated\n passwords',
+                                );
+                              } else {
+                                return PasswordContainer(
+                                  number: snapshot.data ?? 0,
+                                  text: 'Generated\n passwords',
+                                );
+                              }
+                            },
                           ),
                         ],
                       ),
+
                       const SizedBox(height: 20),
                       HomeSearchBar(
                         focusNode: _focusNode,
