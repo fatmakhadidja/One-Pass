@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'package:flutter/services.dart';
 import 'package:passwords_manager/screens/accountdetails.dart';
+import 'package:passwords_manager/db/password-managerDB.dart';
 
 class CountButton extends StatefulWidget {
   final Color clr;
@@ -187,7 +188,14 @@ class AccountContainer extends StatelessWidget {
                 ],
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () async {
+                  List<Map<String, dynamic>> accounts = await db.getData(
+                    "SELECT * FROM accounts WHERE id = $accountId",
+                  );
+                  Map<String, dynamic> accountData = accounts.first;
+                  String password = accountData['password'];
+                  copyToClipboard(password, context);
+                },
                 icon: Icon(Icons.copy, color: primaryColor),
               ),
             ],
