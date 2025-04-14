@@ -18,11 +18,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Color borderColor = const Color(0xffF1F1F1);
 
   List<Map<String, dynamic>> accounts = [
-    {'icon': Icons.facebook, 'account': 'Facebook'},
-    {'icon': Icons.camera_alt, 'account': 'Instagram'},
-    {'icon': Icons.alternate_email, 'account': 'Twitter'},
-    {'icon': Icons.work, 'account': 'LinkedIn'},
-    {'icon': Icons.mail, 'account': 'Gmail'},
+    {'icon': Icons.lock, 'account': 'Facebook'},
+    {'icon': Icons.lock, 'account': 'Instagram'},
+    {'icon': Icons.lock, 'account': 'Twitter'},
+    {'icon': Icons.lock, 'account': 'LinkedIn'},
+    {'icon': Icons.lock, 'account': 'Gmail'},
   ];
 
   List<Map<String, dynamic>> filteredAccounts = [];

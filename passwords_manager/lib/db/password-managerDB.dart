@@ -30,7 +30,7 @@ class SqlDB {
     Database db = await openDatabase(
       path,
       onCreate: _onCreate, // Called when database is created for the first time
-      version: 2, // Database version (used for upgrades)
+      version: 1, // Database version (used for upgrades)
       onUpgrade: _onUpgrade, // Called when database version is changed
     );
 
@@ -45,15 +45,23 @@ class SqlDB {
   // Method called when the database is created for the first time
   _onCreate(Database db, int version) async {
     await db.execute('''
-    CREATE TABLE "tasks" (
-      "id" INTEGER PRIMARY KEY AUTOINCREMENT, 
-      "name" TEXT NOT NULL, 
-      "description" TEXT,
-      "category"  INTEGER NOT NULL,
-      "isDone" INTEGER NOT NULL DEFAULT 0,
-      "date" TEXT NOT NULL
-    )
-    '''); // SQL query to create the 'tasks' table
+  CREATE TABLE "user" (
+    "username" TEXT NOT NULL, 
+    "password" TEXT NOT NULL
+  );
+''');
+
+    await db.execute('''
+  CREATE TABLE "accounts" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT, 
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "date" TEXT NOT NULL, 
+    "password" TEXT NOT NULL,
+    "generated" INTEGER NOT NULL
+  );
+''');
+    // SQL query to create the 'tasks' table
   }
 
   // Method to retrieve data using a raw SQL query
@@ -101,15 +109,6 @@ class SqlDB {
     // Execute DELETE query
     return response; // Return the number of affected rows
   }
-
-  Future<int> countTasks(String table, int category, String date) async {
-    Database? mydb = await db; // Ensure database is open
-
-    List<Map<String, dynamic>> result = await mydb!.rawQuery(
-      'SELECT COUNT(*) as count FROM $table WHERE category = ? AND date = ?',
-      [category, date], // Pass parameters safely
-    );
-
-    return result.isNotEmpty ? result.first['count'] as int : 0;
-  }
 }
+
+final db = SqlDB();
