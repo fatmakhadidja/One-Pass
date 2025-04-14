@@ -86,7 +86,7 @@ class _AccountdetailsState extends State<Accountdetails> {
                     child: ColoredButton(
                       text: 'Delete',
                       whenPressed: () {
-                        confirmDeletion(context);
+                        confirmDeletion(context, account[0]['id']);
                       },
                     ),
                   ),

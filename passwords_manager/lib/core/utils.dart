@@ -289,7 +289,7 @@ void copyToClipboard(String text, BuildContext context) {
   );
 }
 
-void confirmDeletion(BuildContext context) {
+void confirmDeletion(BuildContext context, int accountId) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -320,8 +320,8 @@ void confirmDeletion(BuildContext context) {
           ),
           TextButton(
             onPressed: () {
-              // Perform deletion logic here
-              Navigator.of(context).pop(); // Close the dialog after deletion
+              db.deleteData("DELETE FROM accounts WHERE id = $accountId");
+              Navigator.pushReplacementNamed(context, '/home');
             },
             child: Text(
               "Delete",
