@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/core/utils.dart';
 import 'package:passwords_manager/db/password-managerDB.dart';
+import 'package:passwords_manager/screens/update.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 
 class Accountdetails extends StatefulWidget {
@@ -95,7 +96,14 @@ class _AccountdetailsState extends State<Accountdetails> {
                     child: BorderedButton(
                       text: 'Update',
                       whenPressed: () {
-                        Navigator.pushNamed(context, '/update');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) =>
+                                    Update(accountId: account[0]['id']),
+                          ),
+                        );
                       },
                     ),
                   ),

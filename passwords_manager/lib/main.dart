@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:passwords_manager/screens/accountdetails.dart';
+
 import 'package:passwords_manager/screens/addnew.dart';
 import 'package:passwords_manager/screens/generatenew.dart';
 import 'package:passwords_manager/screens/homescreen.dart';
 import 'package:passwords_manager/screens/register.dart';
-import 'package:passwords_manager/screens/update.dart';
+
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'package:passwords_manager/theme/theme_manager.dart';
 import 'screens/splash.dart';
@@ -48,17 +48,16 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-    
       routes: {
         '/home': (context) => HomeScreen(),
-        '/update': (context) => Update(),
+
         '/addnew': (context) => Addnew(),
         '/generatenew': (context) => Generatenew(),
         '/changePassword': (context) => Changepassword(),
         '/authentificate': (context) => Authentificate(),
         '/register': (context) => Register(),
       },
-      
+
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeManager.themeMode,

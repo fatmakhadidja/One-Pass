@@ -1,16 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/core/utils.dart';
+import 'package:passwords_manager/db/password-managerDB.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 
-
 class Update extends StatefulWidget {
-  const Update({super.key});
+  final int accountId;
+  const Update({super.key, required this.accountId});
 
   @override
   State<Update> createState() => _UpdateState();
 }
 
 class _UpdateState extends State<Update> {
+  TextEditingController accountNameCtrl = TextEditingController();
+  TextEditingController accountEmailCtrl = TextEditingController();
+  TextEditingController accountPasswordCtrl = TextEditingController();
+  List<Map<String, dynamic>> account = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchAccount(); // call the method on init
+  }
+
+  void updateAccount() async {
+    db.updateData(
+      'accounts',
+      {
+        'name': accountNameCtrl.text,
+        'password': accountPasswordCtrl.text,
+        'email': accountEmailCtrl.text,
+      },
+      'id = ?',
+      [widget.accountId],
+    );
+    Navigator.pushReplacementNamed(context, '/home');
+  }
+
+  void fetchAccount() async {
+    account = await db.getData(
+      "SELECT * FROM accounts WHERE id = ${widget.accountId}",
+    );
+    setState(() {}); // to rebuild the widget with new data
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,14 +78,23 @@ class _UpdateState extends State<Update> {
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       SizedBox(height: 100),
-                      UpdateRows(title: 'NAME', description: 'Facebook'),
-                      SizedBox(height: 40),
-                      UpdateRows(
-                        title: 'EMAIL/USERNAME',
-                        description: 'Facebook',
+                      AddRows(
+                        title: 'NAME',
+                        description: account[0]['name'],
+                        controller: accountNameCtrl,
                       ),
                       SizedBox(height: 40),
-                      UpdateRows(title: 'PASSWORD', description: 'Facebook'),
+                      AddRows(
+                        title: 'EMAIL/USERNAME',
+                        description: account[0]['email'],
+                        controller: accountEmailCtrl,
+                      ),
+                      SizedBox(height: 40),
+                      AddRows(
+                        title: 'PASSWORD',
+                        description: account[0]['password'],
+                        controller: accountPasswordCtrl,
+                      ),
                       SizedBox(height: 40),
 
                       Row(
@@ -74,64 +116,22 @@ class _UpdateState extends State<Update> {
                 ),
               ),
             ),
-
-           
           ],
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 20,left: 30,right: 30),
+        padding: const EdgeInsets.only(bottom: 20, left: 30, right: 30),
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.8,
           child: ColoredButton(
             text: 'Save changes',
             whenPressed: () {
-              Navigator.pushNamed(context, '/addnew');
+              updateAccount();
+              Navigator.pushReplacementNamed(context, '/home');
             },
           ),
         ),
       ),
-    );
-  }
-}
-
-class UpdateRows extends StatelessWidget {
-  final String title;
-  final String description;
-  const UpdateRows({super.key, required this.title, required this.description});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title, style: Theme.of(context).textTheme.titleMedium),
-        TextField(
-          decoration: InputDecoration(
-            labelText: description,
-            labelStyle: Theme.of(context).textTheme.titleMedium,
-            floatingLabelBehavior: FloatingLabelBehavior.never,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
-                color: Theme.of(context).indicatorColor,
-                width: 2,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
-                color: Theme.of(context).indicatorColor,
-                width: 2,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: primaryColor, width: 2),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
