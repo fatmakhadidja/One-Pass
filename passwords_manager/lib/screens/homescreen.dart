@@ -191,6 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: AccountContainer(
                                         icon: Icons.lock,
                                         account: account['name'],
+                                        accountId: account['id'],
                                       ),
                                     );
                                   },

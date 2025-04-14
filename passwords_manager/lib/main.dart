@@ -48,9 +48,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+    
       routes: {
         '/home': (context) => HomeScreen(),
-        '/accountdetails': (context) => Accountdetails(),
         '/update': (context) => Update(),
         '/addnew': (context) => Addnew(),
         '/generatenew': (context) => Generatenew(),
@@ -58,6 +58,7 @@ class _MyAppState extends State<MyApp> {
         '/authentificate': (context) => Authentificate(),
         '/register': (context) => Register(),
       },
+      
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeManager.themeMode,

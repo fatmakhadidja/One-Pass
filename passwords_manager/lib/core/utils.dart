@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'package:flutter/services.dart';
+import 'package:passwords_manager/screens/accountdetails.dart';
 
 class CountButton extends StatefulWidget {
   final Color clr;
@@ -133,6 +134,8 @@ class _HomeSearchBarState extends State<HomeSearchBar> {
 }
 
 class AccountContainer extends StatelessWidget {
+  final int accountId;
+
   final IconData icon;
   final String account;
 
@@ -140,13 +143,19 @@ class AccountContainer extends StatelessWidget {
     super.key,
     required this.icon,
     required this.account,
+    required this.accountId,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/accountdetails');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Accountdetails(accountId: accountId),
+          ), // example ID
+        );
       },
       child: Container(
         height: MediaQuery.of(context).size.height * 0.101,

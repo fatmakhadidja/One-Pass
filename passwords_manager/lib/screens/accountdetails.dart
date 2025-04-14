@@ -2,16 +2,33 @@
 
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/core/utils.dart';
+import 'package:passwords_manager/db/password-managerDB.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 
 class Accountdetails extends StatefulWidget {
-  const Accountdetails({super.key});
+  final int accountId;
+  const Accountdetails({super.key, required this.accountId});
 
   @override
   State<Accountdetails> createState() => _AccountdetailsState();
 }
 
 class _AccountdetailsState extends State<Accountdetails> {
+  List<Map<String, dynamic>> account = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchAccount(); // call the method on init
+  }
+
+  void fetchAccount() async {
+    account = await db.getData(
+      "SELECT * FROM accounts WHERE id = ${widget.accountId}",
+    );
+    setState(() {}); // to rebuild the widget with new data
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,20 +53,20 @@ class _AccountdetailsState extends State<Accountdetails> {
               ),
 
               Text(
-                'Facebook',
+                account[0]['name'],
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               SizedBox(height: 100),
               DetailsRow(
                 icon: Icons.calendar_month,
-                text: '20/03/2025',
+                text: account[0]['date'],
                 passwordtext: '',
                 password: false,
               ),
               SizedBox(height: 40),
               DetailsRow(
                 icon: Icons.person,
-                text: 'Djerfi@gmail.com',
+                text: account[0]['email'],
                 passwordtext: '',
                 password: false,
               ),
@@ -57,7 +74,7 @@ class _AccountdetailsState extends State<Accountdetails> {
               DetailsRow(
                 icon: Icons.lock,
                 text: '********',
-                passwordtext: 'fuck off',
+                passwordtext: account[0]['password'],
                 password: true,
               ),
               Spacer(),
