@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/core/utils.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
+import 'dart:math';
 
 class Generatenew extends StatefulWidget {
   const Generatenew({super.key});
@@ -10,7 +11,9 @@ class Generatenew extends StatefulWidget {
 }
 
 class _GeneratenewState extends State<Generatenew> {
-  String generatedPassword = 'ghstdhshd';
+  TextEditingController passwordCtrl = TextEditingController(
+    text: generateRandomString(8, false),
+  );
   int selectedLength = 8;
   String includeSymbols = 'No';
   @override
@@ -47,7 +50,10 @@ class _GeneratenewState extends State<Generatenew> {
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       SizedBox(height: 100),
-                      GenerateNewTextField(generatedPassword: generatedPassword,),
+                      GenerateNewTextField(
+                        controller: passwordCtrl,
+                        generatedPassword: passwordCtrl.text,
+                      ),
                       SizedBox(height: 40),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,15 +130,23 @@ class _GeneratenewState extends State<Generatenew> {
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: BorderedButton(
                               text: 'Randomize',
-                              whenPressed: () {},
+                              whenPressed: () {
+                                setState(() {
+                                  passwordCtrl.text = generateRandomString(
+                                    selectedLength,
+                                    includeSymbols == 'Yes' ? true : false,
+                                  );
+                                });
+                              },
                             ),
                           ),
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: ColoredButton(
                               text: 'Copy',
-                              whenPressed: () {copyToClipboard(generatedPassword,context);},
-                  
+                              whenPressed: () {
+                                copyToClipboard(passwordCtrl.text, context);
+                              },
                             ),
                           ),
                         ],
@@ -151,32 +165,25 @@ class _GeneratenewState extends State<Generatenew> {
 
 // ignore: must_be_immutable
 class GenerateNewTextField extends StatefulWidget {
+  TextEditingController controller = TextEditingController();
   String generatedPassword;
-  GenerateNewTextField({super.key,required this.generatedPassword});
+  GenerateNewTextField({
+    super.key,
+    required this.generatedPassword,
+    required this.controller,
+  });
 
   @override
   State<GenerateNewTextField> createState() => _GenerateNewTextFieldState();
 }
 
 class _GenerateNewTextFieldState extends State<GenerateNewTextField> {
- late TextEditingController mycontroller;
-
-  @override
-  void initState() {
-    super.initState();
-    mycontroller = TextEditingController(text: widget.generatedPassword);
-  }
-
-  @override
-  void dispose() {
-    mycontroller.dispose(); // Dispose the controller to free resources
-    super.dispose();
-  }
+  late TextEditingController mycontroller;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: mycontroller,
+      controller: widget.controller,
       style: TextStyle(
         color: Theme.of(context).secondaryHeaderColor,
         fontSize: 18,
@@ -203,7 +210,25 @@ class _GenerateNewTextFieldState extends State<GenerateNewTextField> {
             width: 2,
           ),
         ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: primaryColor, width: 2),
+        ),
       ),
     );
   }
+}
+
+String generateRandomString(int length, bool includeSymbols) {
+  const String letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const String numbers = '0123456789';
+  const String symbols = '!@#\$%^&*()-_=+[]{};:,.<>?/|';
+
+  final String chars = letters + numbers + (includeSymbols ? symbols : '');
+  final Random random = Random.secure();
+
+  return List.generate(
+    length,
+    (index) => chars[random.nextInt(chars.length)],
+  ).join();
 }
