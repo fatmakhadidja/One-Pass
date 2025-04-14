@@ -11,20 +11,58 @@ class Addnew extends StatefulWidget {
 }
 
 class _AddnewState extends State<Addnew> {
-  void addAccount() async {
-    db.insertData('accounts', {
-      'name': accountnameCtrl.text,
-      'password': accountpasswordCtrl.text,
-      'email': accountemailCtrl.text,
-      'date': DateTime.now().toIso8601String().split('T')[0],
-      'generated': 0,
-    });
-    Navigator.pushReplacementNamed(context, '/home');
-  }
-
   TextEditingController accountnameCtrl = TextEditingController();
   TextEditingController accountemailCtrl = TextEditingController();
   TextEditingController accountpasswordCtrl = TextEditingController();
+
+  void showMissingFieldsDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+            "Incomplete Fields",
+            style: TextStyle(
+              color: primaryColor,
+              fontSize: 16,
+              fontFamily: 'BabasNeue',
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          content: Text(
+            "Please fill in all fields before submitting.",
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          actions: [
+            TextButton(
+              child: const Text("OK"),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void addAccount() async {
+    if (accountnameCtrl.text.trim().isEmpty ||
+        accountemailCtrl.text.trim().isEmpty ||
+        accountpasswordCtrl.text.trim().isEmpty) {
+      showMissingFieldsDialog();
+      return;
+    }
+
+    await db.insertData('accounts', {
+      'name': accountnameCtrl.text.trim(),
+      'password': accountpasswordCtrl.text.trim(),
+      'email': accountemailCtrl.text.trim(),
+      'date': DateTime.now().toIso8601String().split('T')[0],
+      'generated': 0,
+    });
+
+    Navigator.pushReplacementNamed(context, '/home');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +84,7 @@ class _AddnewState extends State<Addnew> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.arrow_back_ios,
                               color: primaryColor,
                             ),
@@ -57,26 +95,25 @@ class _AddnewState extends State<Addnew> {
                         'ADD NEW',
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
-                      SizedBox(height: 100),
+                      const SizedBox(height: 100),
                       AddRows(
                         title: 'NAME',
                         description: 'Enter account name',
                         controller: accountnameCtrl,
                       ),
-                      SizedBox(height: 40),
+                      const SizedBox(height: 40),
                       AddRows(
                         title: 'EMAIL/USERNAME',
                         description: 'Enter email/username',
                         controller: accountemailCtrl,
                       ),
-                      SizedBox(height: 40),
+                      const SizedBox(height: 40),
                       AddRows(
                         title: 'PASSWORD',
                         description: 'Enter password',
                         controller: accountpasswordCtrl,
                       ),
-                      SizedBox(height: 40),
-
+                      const SizedBox(height: 40),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -103,12 +140,7 @@ class _AddnewState extends State<Addnew> {
         padding: const EdgeInsets.only(bottom: 20, left: 30, right: 30),
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.8,
-          child: ColoredButton(
-            text: 'Add new',
-            whenPressed: () {
-              addAccount();
-            },
-          ),
+          child: ColoredButton(text: 'Add new', whenPressed: addAccount),
         ),
       ),
     );
