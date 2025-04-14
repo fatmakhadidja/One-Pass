@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/core/utils.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
+import 'package:passwords_manager/db/password-managerDB.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -10,9 +11,36 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  TextEditingController myController1 = TextEditingController();
-  TextEditingController myController2 = TextEditingController();
-  TextEditingController myController3 = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmpasswordController = TextEditingController();
+
+  String? _passwordError;
+
+  @override
+  void initState() {
+    super.initState();
+
+    confirmpasswordController.addListener(() {
+      if (confirmpasswordController.text != passwordController.text) {
+        setState(() {
+          _passwordError = "Passwords do not match";
+        });
+      } else {
+        setState(() {
+          _passwordError = null;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    confirmpasswordController.dispose();
+    super.dispose();
+  }
 
   void _showEmptyFieldPopup() {
     showDialog(
@@ -34,14 +62,44 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  void _handleRegister() {
-    if (myController1.text.trim().isEmpty ||
-        myController2.text.trim().isEmpty ||
-        myController3.text.trim().isEmpty) {
+  void _handleRegister() async {
+    if (usernameController.text.trim().isEmpty ||
+        passwordController.text.trim().isEmpty ||
+        confirmpasswordController.text.trim().isEmpty) {
       _showEmptyFieldPopup();
-    } else {
-      Navigator.pushReplacementNamed(context, '/home');
+      return;
     }
+
+    if (passwordController.text != confirmpasswordController.text) {
+      setState(() {
+        _passwordError = "Passwords do not match";
+      });
+      return;
+    }
+
+    // Show loading indicator
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder:
+          (context) =>
+              Center(child: CircularProgressIndicator(color: primaryColor)),
+    );
+
+    // Wait 2 seconds
+    await Future.delayed(Duration(seconds: 2));
+
+    // Insert user into database
+    await db.insertData('user', {
+      'username': usernameController.text,
+      'password': passwordController.text,
+    });
+
+    // Close loading dialog
+    Navigator.of(context).pop();
+
+    // Navigate to home
+    Navigator.pushReplacementNamed(context, '/home');
   }
 
   @override
@@ -93,7 +151,7 @@ class _RegisterState extends State<Register> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomTextField(
-                    controller: myController1,
+                    controller: usernameController,
                     label: 'Username',
                     hint: 'Enter Username',
                   ),
@@ -102,7 +160,7 @@ class _RegisterState extends State<Register> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomPasswordField(
-                    controller: myController2,
+                    controller: passwordController,
                     label: 'Password',
                     hint: 'Enter password',
                   ),
@@ -110,10 +168,26 @@ class _RegisterState extends State<Register> {
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: CustomPasswordField(
-                    controller: myController3,
-                    label: 'Cinfirm Password',
-                    hint: 'Confirm password',
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomPasswordField(
+                        controller: confirmpasswordController,
+                        label: 'Confirm Password',
+                        hint: 'Confirm password',
+                      ),
+                      if (_passwordError != null)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5.0, left: 12.0),
+                          child: Text(
+                            _passwordError!,
+                            style: const TextStyle(
+                              color: Colors.red,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.04),

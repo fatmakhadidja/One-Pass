@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/core/utils.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
+import 'package:passwords_manager/db/password-managerDB.dart';
 
 class Authentificate extends StatefulWidget {
   const Authentificate({super.key});
@@ -10,8 +11,8 @@ class Authentificate extends StatefulWidget {
 }
 
 class _AuthentificateState extends State<Authentificate> {
-  TextEditingController myController1 = TextEditingController();
-  TextEditingController myController2 = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   void _showEmptyFieldPopup() {
     showDialog(
@@ -33,11 +34,32 @@ class _AuthentificateState extends State<Authentificate> {
     );
   }
 
-  void _handleLogin() {
-    if (myController1.text.trim().isEmpty ||
-        myController2.text.trim().isEmpty) {
+  void _handleLogin() async {
+    if (usernameController.text.trim().isEmpty ||
+        passwordController.text.trim().isEmpty) {
       _showEmptyFieldPopup();
     } else {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder:
+            (context) =>
+                Center(child: CircularProgressIndicator(color: primaryColor)),
+      );
+
+      // Wait 2 seconds
+      await Future.delayed(Duration(seconds: 2));
+
+      // Insert user into database
+      await db.insertData('user', {
+        'username': usernameController.text,
+        'password': passwordController.text,
+      });
+
+      // Close loading dialog
+      Navigator.of(context).pop();
+
+      // Navigate to home
       Navigator.pushReplacementNamed(context, '/home');
     }
   }
@@ -91,7 +113,7 @@ class _AuthentificateState extends State<Authentificate> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomTextField(
-                    controller: myController1,
+                    controller: usernameController,
                     label: 'Username',
                     hint: 'Enter Username',
                   ),
@@ -100,7 +122,7 @@ class _AuthentificateState extends State<Authentificate> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomPasswordField(
-                    controller: myController2,
+                    controller: passwordController,
                     label: 'Password',
                     hint: 'Enter password',
                   ),
