@@ -20,28 +20,39 @@ class _UpdateState extends State<Update> {
   @override
   void initState() {
     super.initState();
-    fetchAccount(); // call the method on init
-  }
-
-  void updateAccount() async {
-    db.updateData(
-      'accounts',
-      {
-        'name': accountNameCtrl.text,
-        'password': accountPasswordCtrl.text,
-        'email': accountEmailCtrl.text,
-      },
-      'id = ?',
-      [widget.accountId],
-    );
-    Navigator.pushReplacementNamed(context, '/home');
+    fetchAccount();
   }
 
   void fetchAccount() async {
     account = await db.getData(
       "SELECT * FROM accounts WHERE id = ${widget.accountId}",
     );
-    setState(() {}); // to rebuild the widget with new data
+    setState(() {});
+  }
+
+  void updateAccount() async {
+    if (account.isEmpty) return;
+
+    final existing = account[0];
+
+    final updatedData = {
+      'name':
+          accountNameCtrl.text.trim().isEmpty
+              ? existing['name']
+              : accountNameCtrl.text.trim(),
+      'email':
+          accountEmailCtrl.text.trim().isEmpty
+              ? existing['email']
+              : accountEmailCtrl.text.trim(),
+      'password':
+          accountPasswordCtrl.text.trim().isEmpty
+              ? existing['password']
+              : accountPasswordCtrl.text.trim(),
+    };
+
+    await db.updateData('accounts', updatedData, 'id = ?', [widget.accountId]);
+
+    Navigator.pushReplacementNamed(context, '/home');
   }
 
   @override
@@ -55,65 +66,72 @@ class _UpdateState extends State<Update> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 15),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            icon: Icon(
-                              Icons.arrow_back_ios,
-                              color: primaryColor,
-                            ),
+                child:
+                    account.isEmpty
+                        ? const Center(child: CircularProgressIndicator())
+                        : SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    icon: const Icon(
+                                      Icons.arrow_back_ios,
+                                      color: primaryColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                'UPDATE',
+                                style:
+                                    Theme.of(context).textTheme.headlineLarge,
+                              ),
+                              const SizedBox(height: 100),
+                              AddRows(
+                                title: 'NAME',
+                                description: account[0]['name'],
+                                controller: accountNameCtrl,
+                              ),
+                              const SizedBox(height: 40),
+                              AddRows(
+                                title: 'EMAIL/USERNAME',
+                                description: account[0]['email'],
+                                controller: accountEmailCtrl,
+                              ),
+                              const SizedBox(height: 40),
+                              AddRows(
+                                title: 'PASSWORD',
+                                description: account[0]['password'],
+                                controller: accountPasswordCtrl,
+                              ),
+                              const SizedBox(height: 40),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.4,
+                                    child: BorderedButton(
+                                      text: 'Generate password',
+                                      whenPressed: () {
+                                        Navigator.pushNamed(
+                                          context,
+                                          '/generatenew',
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      Text(
-                        'UPDATE',
-                        style: Theme.of(context).textTheme.headlineLarge,
-                      ),
-                      SizedBox(height: 100),
-                      AddRows(
-                        title: 'NAME',
-                        description: account[0]['name'],
-                        controller: accountNameCtrl,
-                      ),
-                      SizedBox(height: 40),
-                      AddRows(
-                        title: 'EMAIL/USERNAME',
-                        description: account[0]['email'],
-                        controller: accountEmailCtrl,
-                      ),
-                      SizedBox(height: 40),
-                      AddRows(
-                        title: 'PASSWORD',
-                        description: account[0]['password'],
-                        controller: accountPasswordCtrl,
-                      ),
-                      SizedBox(height: 40),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            child: BorderedButton(
-                              text: 'Generate password',
-                              whenPressed: () {
-                                Navigator.pushNamed(context, '/generatenew');
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                        ),
               ),
             ),
           ],
@@ -125,10 +143,7 @@ class _UpdateState extends State<Update> {
           width: MediaQuery.of(context).size.width * 0.8,
           child: ColoredButton(
             text: 'Save changes',
-            whenPressed: () {
-              updateAccount();
-              Navigator.pushReplacementNamed(context, '/home');
-            },
+            whenPressed: updateAccount,
           ),
         ),
       ),
