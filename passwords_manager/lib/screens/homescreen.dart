@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:passwords_manager/db/password-managerDB.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import '../core/utils.dart';
 
@@ -12,33 +13,33 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void fetchAccounts() async {
+    accounts = await db.getData("SELECT * FROM accounts");
+    setState(() {
+      filteredAccounts = List.from(accounts);
+    });
+  }
+
   int _selectedindex = 0;
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   Color borderColor = const Color(0xffF1F1F1);
 
-  List<Map<String, dynamic>> accounts = [
-    {'icon': Icons.lock, 'account': 'Facebook'},
-    {'icon': Icons.lock, 'account': 'Instagram'},
-    {'icon': Icons.lock, 'account': 'Twitter'},
-    {'icon': Icons.lock, 'account': 'LinkedIn'},
-    {'icon': Icons.lock, 'account': 'Gmail'},
-  ];
+  List<Map<String, dynamic>> accounts = [];
 
   List<Map<String, dynamic>> filteredAccounts = [];
 
   @override
   void initState() {
     super.initState();
-    filteredAccounts = List.from(accounts);
-
+    fetchAccounts();
     _searchController.addListener(() {
       final query = _searchController.text.toLowerCase();
       setState(() {
         filteredAccounts =
             accounts
                 .where(
-                  (account) => account['account']
+                  (account) => account['name']
                       .toString()
                       .toLowerCase()
                       .startsWith(query),
@@ -146,8 +147,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         vertical: 8.0,
                                       ),
                                       child: AccountContainer(
-                                        icon: account['icon']!,
-                                        account: account['account']!,
+                                        icon: Icons.lock,
+                                        account: account['name'],
                                       ),
                                     );
                                   },

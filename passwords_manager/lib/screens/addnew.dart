@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/core/utils.dart';
+import 'package:passwords_manager/db/password-managerDB.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 
 class Addnew extends StatefulWidget {
@@ -10,6 +11,20 @@ class Addnew extends StatefulWidget {
 }
 
 class _AddnewState extends State<Addnew> {
+  void addAccount() async {
+    db.insertData('accounts', {
+      'name': accountnameCtrl.text,
+      'password': accountpasswordCtrl.text,
+      'email': accountemailCtrl.text,
+      'date': DateTime.now().toIso8601String().split('T')[0],
+      'generated': 0,
+    });
+    Navigator.pushReplacementNamed(context, '/home');
+  }
+
+  TextEditingController accountnameCtrl = TextEditingController();
+  TextEditingController accountemailCtrl = TextEditingController();
+  TextEditingController accountpasswordCtrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,14 +58,23 @@ class _AddnewState extends State<Addnew> {
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       SizedBox(height: 100),
-                      AddRows(title: 'NAME', description: 'Enter account name'),
+                      AddRows(
+                        title: 'NAME',
+                        description: 'Enter account name',
+                        controller: accountnameCtrl,
+                      ),
                       SizedBox(height: 40),
                       AddRows(
                         title: 'EMAIL/USERNAME',
                         description: 'Enter email/username',
+                        controller: accountemailCtrl,
                       ),
                       SizedBox(height: 40),
-                      AddRows(title: 'PASSWORD', description: 'Enter password'),
+                      AddRows(
+                        title: 'PASSWORD',
+                        description: 'Enter password',
+                        controller: accountpasswordCtrl,
+                      ),
                       SizedBox(height: 40),
 
                       Row(
@@ -79,10 +103,14 @@ class _AddnewState extends State<Addnew> {
         padding: const EdgeInsets.only(bottom: 20, left: 30, right: 30),
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.8,
-          child: ColoredButton(text: 'Add new', whenPressed: () {}),
+          child: ColoredButton(
+            text: 'Add new',
+            whenPressed: () {
+              addAccount();
+            },
+          ),
         ),
       ),
     );
   }
 }
-

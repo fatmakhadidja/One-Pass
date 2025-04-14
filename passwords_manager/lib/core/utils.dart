@@ -387,9 +387,15 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
 }
 
 class AddRows extends StatelessWidget {
+  final TextEditingController controller;
   final String title;
   final String description;
-  const AddRows({super.key, required this.title, required this.description});
+  const AddRows({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -398,6 +404,7 @@ class AddRows extends StatelessWidget {
       children: [
         Text(title, style: Theme.of(context).textTheme.titleMedium),
         TextField(
+          controller: controller,
           decoration: InputDecoration(
             labelText: description,
             labelStyle: TextStyle(
@@ -464,7 +471,8 @@ class CustomTextField extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(5)),
           borderSide: BorderSide(
-            color: primaryColor, // Make sure primaryColor is defined in your theme or globally
+            color:
+                primaryColor, // Make sure primaryColor is defined in your theme or globally
             width: 1.25,
           ),
         ),
@@ -472,4 +480,3 @@ class CustomTextField extends StatelessWidget {
     );
   }
 }
-
