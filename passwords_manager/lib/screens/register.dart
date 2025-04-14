@@ -87,7 +87,7 @@ class _RegisterState extends State<Register> {
     );
 
     // Wait 2 seconds
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
 
     // Insert user into database
     await db.insertData('user', {

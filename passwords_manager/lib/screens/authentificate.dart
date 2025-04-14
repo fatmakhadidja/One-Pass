@@ -48,19 +48,34 @@ class _AuthentificateState extends State<Authentificate> {
       );
 
       // Wait 2 seconds
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 1));
 
       // Insert user into database
-      await db.insertData('user', {
-        'username': usernameController.text,
-        'password': passwordController.text,
-      });
-
-      // Close loading dialog
-      Navigator.of(context).pop();
-
-      // Navigate to home
-      Navigator.pushReplacementNamed(context, '/home');
+      List<Map> user = await db.getData("SELECT * FROM user LIMIT 1");
+      if (user[0]['username'] == usernameController.text &&
+          user[0]['password'] == passwordController.text) {
+        Navigator.of(context).pop();
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        Navigator.of(context).pop();
+        showDialog(
+          context: context,
+          builder:
+              (context) => AlertDialog(
+                title: Text("Wrong credentials"),
+                content: Text(
+                  "Try again.",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                actions: [
+                  TextButton(
+                    child: Text("OK", style: TextStyle(color: primaryColor)),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ],
+              ),
+        );
+      }
     }
   }
 
