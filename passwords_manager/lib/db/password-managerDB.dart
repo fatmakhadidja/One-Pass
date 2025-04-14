@@ -61,7 +61,6 @@ class SqlDB {
     "generated" INTEGER NOT NULL
   );
 ''');
-    // SQL query to create the 'tasks' table
   }
 
   // Method to retrieve data using a raw SQL query
