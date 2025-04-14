@@ -22,7 +22,9 @@ class SqlDB {
   initialDB() async {
     String databasepath = await getDatabasesPath(); // Get default database path
     String path = join(
-        databasepath, 'passwords_managerDB.db'); // Set the database file name and location
+      databasepath,
+      'onepass.db',
+    ); // Set the database file name and location
 
     // Open the database and execute onCreate or onUpgrade if needed
     Database db = await openDatabase(
@@ -58,8 +60,9 @@ class SqlDB {
   getData(String sql) async {
     Database? mydb = await db;
     // Get database instance
-    List<Map<String, dynamic>> response =
-        await mydb!.rawQuery(sql); // Execute SELECT query
+    List<Map<String, dynamic>> response = await mydb!.rawQuery(
+      sql,
+    ); // Execute SELECT query
 
     return response; // Return fetched data as a list of maps
   }
@@ -67,13 +70,20 @@ class SqlDB {
   // Method to insert data into the database
   Future<int> insertData(String table, Map<String, dynamic> data) async {
     Database? mydb = await db;
-    return await mydb!
-        .insert(table, data, conflictAlgorithm: ConflictAlgorithm.replace);
+    return await mydb!.insert(
+      table,
+      data,
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
   }
 
   // Method to update existing data in the database
-  Future<int> updateData(String table, Map<String, dynamic> data,
-      String whereClause, List<dynamic> whereArgs) async {
+  Future<int> updateData(
+    String table,
+    Map<String, dynamic> data,
+    String whereClause,
+    List<dynamic> whereArgs,
+  ) async {
     Database? mydb = await db;
     return await mydb!.update(
       table,
