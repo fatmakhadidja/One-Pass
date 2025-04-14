@@ -95,7 +95,7 @@ class OnboardingPage extends StatefulWidget {
   final int currentIndex;
   final bool isLast;
 
-  OnboardingPage({
+  const OnboardingPage({
     super.key,
     required this.logo,
     required this.title,
