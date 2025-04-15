@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:passwords_manager/core/utils.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'package:passwords_manager/db/password-managerDB.dart';
+import 'package:local_auth/local_auth.dart';
 
 class Authentificate extends StatefulWidget {
   const Authentificate({super.key});
@@ -19,10 +20,18 @@ class _AuthentificateState extends State<Authentificate> {
       context: context,
       builder:
           (context) => AlertDialog(
-            title: Text("Missing Fields"),
+            title: Text(
+              "Missing Fields",
+              style: TextStyle(
+                color: primaryColor,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'BabasNeue',
+              ),
+            ),
             content: Text(
               "Please fill in both username and password.",
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             actions: [
               TextButton(
@@ -81,6 +90,7 @@ class _AuthentificateState extends State<Authentificate> {
 
   @override
   Widget build(BuildContext context) {
+    final LocalAuthentication auth = LocalAuthentication();
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SingleChildScrollView(
@@ -146,11 +156,26 @@ class _AuthentificateState extends State<Authentificate> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: ColoredButton(
-                        text: 'Login',
-                        whenPressed: _handleLogin,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        child: ColoredButton(
+                          text: 'Login',
+                          whenPressed: _handleLogin,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        child: BorderedButton(
+                          text: 'Use finger print',
+                          whenPressed: () {
+                            authenticate(context, auth);
+                          },
+                        ),
                       ),
                     ),
                   ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:passwords_manager/screens/addnew.dart';
+import 'package:passwords_manager/screens/fingerprint_authentication.dart';
 import 'package:passwords_manager/screens/generatenew.dart';
 import 'package:passwords_manager/screens/homescreen.dart';
 import 'package:passwords_manager/screens/register.dart';
@@ -13,6 +14,7 @@ import 'screens/authentificate.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await themeManager.loadTheme();
   runApp(const MyApp());
 }
@@ -56,6 +58,7 @@ class _MyAppState extends State<MyApp> {
         '/changePassword': (context) => Changepassword(),
         '/authentificate': (context) => Authentificate(),
         '/register': (context) => Register(),
+        '/fingerprint': (context) => FingerprintAuthPage(),
       },
 
       theme: lightTheme,
