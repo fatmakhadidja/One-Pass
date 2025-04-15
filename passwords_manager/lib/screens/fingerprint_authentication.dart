@@ -28,7 +28,9 @@ class _FingerprintAuthPageState extends State<FingerprintAuthPage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(context, '/home');
+                          },
                           child: Row(
                             children: [
                               Text(
