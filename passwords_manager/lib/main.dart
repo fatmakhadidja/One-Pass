@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:passwords_manager/screens/addnew.dart';
 import 'package:passwords_manager/screens/fingerprint_authentication.dart';
@@ -14,7 +15,10 @@ import 'screens/authentificate.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: [SystemUiOverlay.top],
+  );
   await themeManager.loadTheme();
   runApp(const MyApp());
 }
