@@ -113,46 +113,20 @@ class _HomeScreenState extends State<HomeScreen> {
                           FutureBuilder<int>(
                             future: passwordsNumber,
                             builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const PasswordContainer(
-                                  number: 0,
-                                  text: 'Stored \n passwords',
-                                );
-                              } else if (snapshot.hasError) {
-                                return const PasswordContainer(
-                                  number: 0,
-                                  text: 'Stored \n passwords',
-                                );
-                              } else {
-                                return PasswordContainer(
-                                  number: snapshot.data ?? 0,
-                                  text: 'Stored \n passwords',
-                                );
-                              }
+                              return PasswordContainer(
+                                number: snapshot.data ?? 0,
+                                text: 'Stored \n passwords',
+                              );
                             },
                           ),
 
                           FutureBuilder<int>(
                             future: generatedNumber,
                             builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const PasswordContainer(
-                                  number: 0,
-                                  text: 'Generated\n passwords',
-                                );
-                              } else if (snapshot.hasError) {
-                                return const PasswordContainer(
-                                  number: 0,
-                                  text: 'Generated\n passwords',
-                                );
-                              } else {
-                                return PasswordContainer(
-                                  number: snapshot.data ?? 0,
-                                  text: 'Generated\n passwords',
-                                );
-                              }
+                              return PasswordContainer(
+                                number: snapshot.data ?? 0,
+                                text: 'Generated\n passwords',
+                              );
                             },
                           ),
                         ],

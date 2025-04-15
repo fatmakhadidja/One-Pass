@@ -39,75 +39,92 @@ class _AccountdetailsState extends State<Accountdetails> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 8, 20, 15),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   IconButton(
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/home');
-                    },
+                    onPressed:
+                        () => Navigator.pushReplacementNamed(context, '/home'),
                     icon: Icon(Icons.arrow_back_ios, color: primaryColor),
                   ),
                 ],
               ),
-
-              Text(
-                account[0]['name'],
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
-              SizedBox(height: 100),
-              DetailsRow(
-                icon: Icons.calendar_month,
-                text: account[0]['date'],
-                passwordtext: '',
-                password: false,
-              ),
-              SizedBox(height: 40),
-              DetailsRow(
-                icon: Icons.person,
-                text: account[0]['email'],
-                passwordtext: '',
-                password: false,
-              ),
-              SizedBox(height: 40),
-              DetailsRow(
-                icon: Icons.lock,
-                text: '********',
-                passwordtext: account[0]['password'],
-                password: true,
-              ),
-              Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    child: ColoredButton(
-                      text: 'Delete',
-                      whenPressed: () {
-                        confirmDeletion(context, account[0]['id']);
-                      },
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    child: BorderedButton(
-                      text: 'Update',
-                      whenPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder:
-                                (context) =>
-                                    Update(accountId: account[0]['id']),
+              Expanded(
+                child: SingleChildScrollView(
+                  child:
+                      account.isEmpty
+                          ? Center(child: CircularProgressIndicator())
+                          : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                account[0]['name'],
+                                style:
+                                    Theme.of(context).textTheme.headlineLarge,
+                              ),
+                              SizedBox(height: 100),
+                              DetailsRow(
+                                icon: Icons.calendar_month,
+                                text: account[0]['date'],
+                                passwordtext: '',
+                                password: false,
+                              ),
+                              SizedBox(height: 40),
+                              DetailsRow(
+                                icon: Icons.person,
+                                text: account[0]['email'],
+                                passwordtext: '',
+                                password: false,
+                              ),
+                              SizedBox(height: 40),
+                              DetailsRow(
+                                icon: Icons.lock,
+                                text: '********',
+                                passwordtext: account[0]['password'],
+                                password: true,
+                              ),
+                              SizedBox(height: 40),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.4,
+                                    child: ColoredButton(
+                                      text: 'Delete',
+                                      whenPressed: () {
+                                        confirmDeletion(
+                                          context,
+                                          account[0]['id'],
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.4,
+                                    child: BorderedButton(
+                                      text: 'Update',
+                                      whenPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder:
+                                                (context) => Update(
+                                                  accountId: account[0]['id'],
+                                                ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
+                ),
               ),
             ],
           ),
@@ -183,6 +200,6 @@ class _DetailsRowState extends State<DetailsRow> {
   }
 }
 
-void gotToHome (BuildContext context) {
+void gotToHome(BuildContext context) {
   Navigator.pushReplacementNamed(context, '/home');
 }
