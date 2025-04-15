@@ -4,10 +4,10 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<key>NSFaceIDUsageDescription</key>
-    <string>This app uses Face ID to authenticate the user</string>
+     <string>This app uses Face ID to authenticate the user</string>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Passwords Manager</string>
+	<string>One Pass</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
