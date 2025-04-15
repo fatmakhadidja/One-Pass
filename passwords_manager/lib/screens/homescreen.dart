@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
           _selectedindex == 0
               ? SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Column(
                     children: [
                       const SizedBox(height: 10),
