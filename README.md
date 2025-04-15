@@ -1,5 +1,5 @@
 #  One Pass
-**One Pass** is a secure and user-friendly **password manager** that allows you to safely store and manage all your login credentials in one place.
+One Pass is a secure and user-friendly password manager built using Flutter. It enables you to safely store and manage all your login credentials in one place, utilizing Sqflite for local database storage and SharedPreferences for lightweight storage needs like app settings or modes.
 - One Pass UI design :   
 https://www.figma.com/design/HYcmRBuSPgvV14LpoRfcWJ/OnePass--A-password-manager-UI-Kit--Community-?node-id=0-1&p=f&t=Vr9utE9kAT1pUrvj-0
 - One Pass download link :    
