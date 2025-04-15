@@ -49,7 +49,7 @@ class _RegisterState extends State<Register> {
           (context) => AlertDialog(
             title: Text(
               "Missing Fields",
-              style:TextStyle(
+              style: TextStyle(
                 color: primaryColor,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -70,11 +70,43 @@ class _RegisterState extends State<Register> {
     );
   }
 
+  void _showShortPasswordPopup() {
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: Text(
+              "Short password",
+              style: TextStyle(
+                color: primaryColor,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'BabasNeue',
+              ),
+            ),
+            content: Text(
+              "Please make sure that your password has more than 8 characters.",
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            actions: [
+              TextButton(
+                child: Text("OK", style: TextStyle(color: primaryColor)),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+    );
+  }
+
   void _handleRegister() async {
     if (usernameController.text.trim().isEmpty ||
         passwordController.text.trim().isEmpty ||
         confirmpasswordController.text.trim().isEmpty) {
       _showEmptyFieldPopup();
+      return;
+    }
+    if (passwordController.text.length < 8) {
+      _showShortPasswordPopup();
       return;
     }
 

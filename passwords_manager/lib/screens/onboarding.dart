@@ -78,7 +78,7 @@ class ThirdScreen extends StatelessWidget {
       highlighted: 'AUTOFILL ',
       subtitle: 'YOUR CREDENTIALS',
       description:
-          'Let OnePass autofill your credentials and keep your passwords secure.',
+          'Let One Pass autofill your credentials and keep your passwords secure.',
 
       currentIndex: 2,
       isLast: true,

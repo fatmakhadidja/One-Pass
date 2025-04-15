@@ -57,6 +57,12 @@ class _ChangepasswordState extends State<Changepassword> {
         title: "Missing Fields",
         content: "Please fill in both current and new password.",
       );
+    } else if (NewPasswordCtrl.text.length < 8) {
+      _showDialog(
+        title: "Short password",
+        content:
+            "Please make sure that your  new password has more than 8 characters.",
+      );
     } else if (user[0]['password'] == current) {
       await db.updateData(
         'user',
