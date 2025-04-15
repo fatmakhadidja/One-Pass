@@ -3,6 +3,9 @@ import 'package:passwords_manager/theme/theme_constants.dart';
 import 'package:flutter/services.dart';
 import 'package:passwords_manager/screens/accountdetails.dart';
 import 'package:passwords_manager/db/password-managerDB.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:android_intent_plus/android_intent.dart';
+import 'package:android_intent_plus/flag.dart';
 
 class CountButton extends StatefulWidget {
   final Color clr;
@@ -495,5 +498,60 @@ class CustomTextField extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+Future<void> authenticate(
+  BuildContext context,
+  LocalAuthentication auth,
+) async {
+  try {
+    bool canCheckBiometrics = await auth.canCheckBiometrics;
+    bool isDeviceSupported = await auth.isDeviceSupported();
+    bool isAuthenticated = false;
+
+    if (canCheckBiometrics && isDeviceSupported) {
+      isAuthenticated = await auth.authenticate(
+        localizedReason:
+            'Please scan your fingerprint to proceed. The app will use the fingerprint stored on your device.',
+        options: const AuthenticationOptions(
+          biometricOnly: true,
+          stickyAuth: true,
+        ),
+      );
+    } else {
+      // If biometrics aren't available or supported
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Please set up fingerprint in your phone settings to enable biometric login.',
+          ),
+          action: SnackBarAction(
+            label: 'Open Settings',
+            onPressed: () {
+              final intent = AndroidIntent(
+                action: 'android.settings.SECURITY_SETTINGS',
+                flags: <int>[Flag.FLAG_ACTIVITY_NEW_TASK],
+              );
+              intent.launch();
+            },
+          ),
+        ),
+      );
+      return;
+    }
+
+    if (isAuthenticated) {
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Authentication failed')));
+    }
+  } catch (e) {
+    print('Error using biometric authentication: $e');
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('Biometric error: ${e.toString()}')));
   }
 }

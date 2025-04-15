@@ -98,7 +98,7 @@ class _RegisterState extends State<Register> {
     Navigator.of(context).pop();
 
     // Navigate to home
-    Navigator.pushReplacementNamed(context, '/home');
+    Navigator.pushReplacementNamed(context, '/fingerprint');
   }
 
   @override
@@ -196,7 +196,7 @@ class _RegisterState extends State<Register> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: ColoredButton(
-                        text: 'Register',
+                        text: 'Continue',
                         whenPressed: _handleRegister,
                       ),
                     ),
