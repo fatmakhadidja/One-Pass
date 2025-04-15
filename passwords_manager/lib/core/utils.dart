@@ -283,7 +283,7 @@ void copyToClipboard(String text, BuildContext context) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       elevation: 5,
-      content: Text("Copied to clipboard!"),
+      content: Text("Password copied to clipboard!"),
       duration: Duration(seconds: 1),
     ),
   );
