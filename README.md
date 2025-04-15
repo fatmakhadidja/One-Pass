@@ -3,7 +3,7 @@
 - One Pass UI design :   
 https://www.figma.com/design/HYcmRBuSPgvV14LpoRfcWJ/OnePass--A-password-manager-UI-Kit--Community-?node-id=0-1&p=f&t=Vr9utE9kAT1pUrvj-0
 - One Pass download link :    
-https://drive.google.com/file/d/1gOwIsdth0ECbxBvOkrTe5m3KO5B3DDY5/view?usp=sharing
+https://drive.google.com/drive/u/0/folders/1F6WhyXSIGjKrO8fGM5P--z3wXJ2Yovjl
 
 ##  Features
 
