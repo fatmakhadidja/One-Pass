@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:passwords_manager/db/password-managerDB.dart';
 import 'package:passwords_manager/screens/authentificate.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'onboarding.dart';
 import 'package:loading_indicator/loading_indicator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,19 +22,15 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _navigateToNextScreen() async {
     await Future.delayed(const Duration(seconds: 3)); // Splash delay
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
-
-    if (hasSeenOnboarding) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const Authentificate()),
-      );
-    } else {
-      await prefs.setBool('hasSeenOnboarding', true);
+    if (await db.isTableEmpty('user')) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const Onboarding()),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Authentificate()),
       );
     }
   }

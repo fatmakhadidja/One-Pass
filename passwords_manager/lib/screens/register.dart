@@ -86,7 +86,6 @@ class _RegisterState extends State<Register> {
               Center(child: CircularProgressIndicator(color: primaryColor)),
     );
 
-    // Wait 2 seconds
     await Future.delayed(Duration(seconds: 1));
 
     // Insert user into database

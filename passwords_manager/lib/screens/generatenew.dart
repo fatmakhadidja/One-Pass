@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:passwords_manager/core/utils.dart';
+import 'package:passwords_manager/db/password-managerDB.dart';
 import 'package:passwords_manager/theme/theme_constants.dart';
 import 'dart:math';
 
@@ -130,7 +131,10 @@ class _GeneratenewState extends State<Generatenew> {
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: BorderedButton(
                               text: 'Randomize',
-                              whenPressed: () {
+                              whenPressed: () async {
+                                await db.incrementGeneratedCount();
+                                
+
                                 setState(() {
                                   passwordCtrl.text = generateRandomString(
                                     selectedLength,

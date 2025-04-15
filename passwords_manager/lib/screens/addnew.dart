@@ -57,7 +57,6 @@ class _AddnewState extends State<Addnew> {
       'password': accountpasswordCtrl.text.trim(),
       'email': accountemailCtrl.text.trim(),
       'date': DateTime.now().toIso8601String().split('T')[0],
-      'generated': 0,
     });
 
     Navigator.pushReplacementNamed(context, '/home');
@@ -82,7 +81,7 @@ class _AddnewState extends State<Addnew> {
                         children: [
                           IconButton(
                             onPressed: () {
-                              Navigator.pop(context);
+                              Navigator.pushReplacementNamed(context, '/home');
                             },
                             icon: const Icon(
                               Icons.arrow_back_ios,

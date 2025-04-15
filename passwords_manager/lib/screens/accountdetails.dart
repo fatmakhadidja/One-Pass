@@ -46,7 +46,7 @@ class _AccountdetailsState extends State<Accountdetails> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.pushReplacementNamed(context, '/home');
                     },
                     icon: Icon(Icons.arrow_back_ios, color: primaryColor),
                   ),
@@ -181,4 +181,8 @@ class _DetailsRowState extends State<DetailsRow> {
       ],
     );
   }
+}
+
+void gotToHome (BuildContext context) {
+  Navigator.pushReplacementNamed(context, '/home');
 }
