@@ -47,10 +47,18 @@ class _RegisterState extends State<Register> {
       context: context,
       builder:
           (context) => AlertDialog(
-            title: Text("Missing Fields"),
+            title: Text(
+              "Missing Fields",
+              style:TextStyle(
+                color: primaryColor,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'BabasNeue',
+              ),
+            ),
             content: Text(
               "Please make sure to fill all the fields.",
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             actions: [
               TextButton(

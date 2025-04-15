@@ -38,8 +38,8 @@ class _ChangepasswordState extends State<Changepassword> {
             ),
             actions: [
               TextButton(
-                child: const Text("OK", style: TextStyle(color: primaryColor)),
                 onPressed: onOkPressed ?? () => Navigator.of(context).pop(),
+                child: const Text("OK", style: TextStyle(color: primaryColor)),
               ),
             ],
           ),
