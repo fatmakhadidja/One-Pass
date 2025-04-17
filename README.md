@@ -22,6 +22,49 @@ https://drive.google.com/drive/u/0/folders/1F6WhyXSIGjKrO8fGM5P--z3wXJ2Yovjl
   ![mode and passwoordshange](https://github.com/user-attachments/assets/f190b9e3-4093-475c-8b7f-0c7c73f2e55a)
 
 ---
+ 
+#  Do you want to run the app yourself on your PC without the need to install Flutter and all ? 
+This guide will walk you through setting up the environment, building the Docker image, and running the project.
 
-**One Pass** puts your privacy first, combining simplicity with strong protection for all your sensitive login data.
+## Requirements
 
+- **Docker**: Install Docker on your machine. Instructions can be found on [Docker's official website](https://www.docker.com/get-started).
+- **Git**: Install Git to clone the repository and manage your code.
+
+## Setup Instructions
+
+### 1. Clone the Repository
+
+Start by cloning the repository to your local machine:
+
+```bash
+git clone https://github.com/yourusername/your-repository.git
+cd your-repository
+```
+
+## 2. Build the Docker Image
+The Docker image contains the necessary environment to build and run the app, but you still need Flutter installed locally for making changes. To build the Docker image:
+
+```bash
+docker build -t app_docker_image .
+```
+
+## 3. Run the Docker container
+For Windows Users:
+Since Windows uses a different syntax for file paths, you need to modify the Docker -v option slightly:
+
+```bash
+docker run -it --rm -v ${PWD}:/app app_docker_image bash
+```
+In PowerShell or CMD, you can use the following command:
+
+```bash
+
+docker run -it --rm -v "%cd%:/app" app_docker_image bash
+
+```
+## 3. Run the App
+Once inside the Docker container, you can run the Flutter app:
+
+```bash
+flutter run
