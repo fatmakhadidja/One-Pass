@@ -1,6 +1,7 @@
 workflows:
   flutter-build:
     name: Build Flutter App
+    working_directory: passwords_manager  # <-- Add this
     environment:
       flutter: stable
       xcode: latest
