@@ -1,11 +1,18 @@
 workflows:
   flutter-build:
     name: Build Flutter App
-    working_directory: passwords_manager  # <-- Add this
+    working_directory: passwords_manager
     environment:
       flutter: stable
       xcode: latest
       cocoapods: default
+      vars:
+        APP_STORE_CONNECT_ISSUER_ID: Encrypted(...)
+        APP_STORE_CONNECT_KEY_IDENTIFIER: Encrypted(...)
+        APP_STORE_CONNECT_PRIVATE_KEY: Encrypted(...)
+        CERTIFICATE_PRIVATE_KEY: Encrypted(...)
+        CERTIFICATE_PASSWORD: Encrypted(...)
+        PROVISIONING_PROFILE: Encrypted(...)
 
     cache:
       cache_paths:
@@ -24,13 +31,13 @@ workflows:
         script: |
           flutter build apk --release
 
-      - name: Build iOS App (unsigned)
+      - name: Build signed iOS IPA
         script: |
-          flutter build ios --release --no-codesign
+          flutter build ipa --release
 
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
-      - build/ios/iphoneos/Runner.app
+      - build/ios/ipa/*.ipa
 
     publishing:
       email:
