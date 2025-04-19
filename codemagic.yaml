@@ -1,10 +1,20 @@
 workflows:
   flutter-build:
     name: Build Flutter App
+    working_directory: passwords_manager  # <-- Add this
     environment:
       flutter: stable
       xcode: latest
       cocoapods: default
+
+    cache:
+      cache_paths:
+        - $FLUTTER_ROOT/.pub-cache
+        - ios/Pods
+        - ios/.symlinks
+        - .packages
+        - build/
+
     scripts:
       - name: Install Flutter dependencies
         script: |
