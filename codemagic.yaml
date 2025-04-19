@@ -5,6 +5,15 @@ workflows:
       flutter: stable
       xcode: latest
       cocoapods: default
+
+    cache:
+      cache_paths:
+        - $FLUTTER_ROOT/.pub-cache
+        - ios/Pods
+        - ios/.symlinks
+        - .packages
+        - build/
+
     scripts:
       - name: Install Flutter dependencies
         script: |
