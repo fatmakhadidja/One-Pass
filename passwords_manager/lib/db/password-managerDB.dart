@@ -39,7 +39,6 @@ class SqlDB {
 
   // Method called when the database version is upgraded
   _onUpgrade(Database db, int oldVersion, int newVersion) async {
-    // This is where you would handle schema migrations when updating the database
   }
 
   // Method called when the database is created for the first time
